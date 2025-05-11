@@ -1,0 +1,1106 @@
+/* クトゥルフ神話TRPG キャラクター作成ツール スタイルシート 改良版 */
+
+/* ベーススタイル */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #8e44ad;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --border-color: #bdc3c7;
+    --text-color: #333;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --panel-bg: #fff;
+    --table-header-bg: #f8f9fa;
+    --table-row-bg: #fff;
+    --table-row-alt-bg: #f8f9fa;
+    --input-bg: #fff;
+}
+
+/* ダークモード用変数 */
+[data-theme="dark"] {
+    --primary-color: #1a1f36;
+    --secondary-color: #2a2f45;
+    --accent-color: #9b59b6;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --light-color: #34495e;
+    --dark-color: #1a1f36;
+    --border-color: #3d4654;
+    --text-color: #ecf0f1;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    --panel-bg: #2a2f45;
+    --table-header-bg: #3d4654;
+    --table-row-bg: #2a2f45;
+    --table-row-alt-bg: #34495e;
+    --input-bg: #34495e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* ヘッダー */
+header {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0 1rem;
+}
+
+/* ダークモードトグルスイッチ */
+.theme-switch-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.theme-switch-container span {
+    font-size: 0.8rem;
+    margin: 0 0.5rem;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.slider-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: .4s;
+}
+
+.slider-icon-sun {
+    left: 8px;
+    color: #f1c40f;
+    opacity: 1;
+}
+
+.slider-icon-moon {
+    right: 8px;
+    color: white;
+    opacity: 0;
+}
+
+input:checked + .slider .slider-icon-sun {
+    opacity: 0;
+}
+
+input:checked + .slider .slider-icon-moon {
+    opacity: 1;
+}
+
+/* ボタンとフォーム */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.btn i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.primary {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.primary:hover {
+    background-color: #219653;
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+}
+
+.secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.secondary:hover {
+    background-color: #2c3e50;
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+}
+
+.accent {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.accent:hover {
+    background-color: #7d3c98;
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+}
+
+.info {
+    background-color: #3498db;
+    color: white;
+}
+
+.info:hover {
+    background-color: #2980b9;
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+}
+
+.danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.danger:hover {
+    background-color: #c0392b;
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+}
+
+.select {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.select:hover, .select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.2);
+}
+
+.input {
+    width: 100%;
+    padding: 0.6rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.2);
+    outline: none;
+}
+
+/* プレースホルダーのスタイル調整 */
+.input::placeholder {
+    color: #aaa;
+    opacity: 0.7;
+}
+
+/* タブナビゲーション */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    background-color: var(--panel-bg);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.tab-btn {
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.tab-btn:hover {
+    opacity: 1;
+    background-color: rgba(142, 68, 173, 0.1);
+}
+
+.tab-btn.active {
+    color: var(--accent-color);
+    opacity: 1;
+    position: relative;
+    background-color: rgba(142, 68, 173, 0.05);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* パネル */
+.panel {
+    background-color: var(--panel-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.panel h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel h2 i {
+    margin-right: 0.5rem;
+    color: var(--accent-color);
+}
+
+.panel h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* グリッドレイアウト */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+/* 能力値スタイル */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 最小幅を広げる */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    position: relative;
+    background-color: var(--table-row-bg);
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-item:hover {
+    box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.1);
+}
+
+/* ラベルサイズと折り返し設定の修正 */
+.stat-item label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    font-size: 0.8rem; /* サイズをさらに縮小 */
+    color: var(--text-color);
+    white-space: nowrap; /* テキストを折り返さない */
+    overflow: hidden; /* はみ出した部分を隠す */
+    text-overflow: ellipsis; /* はみ出した部分を省略記号で表示 */
+}
+
+.ability-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ability-control .input {
+    flex: 1;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 600;
+    padding: 0.5rem 0.3rem;
+    min-width: 2.5rem;
+}
+
+.roll-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 0.3rem;
+    position: relative;
+    z-index: 2; /* 重なりを防ぐために高いz-indexを設定 */
+}
+
+.roll-btn:hover {
+    background-color: #7d3c98;
+    transform: rotate(15deg) scale(1.1);
+}
+
+.roll-btn i {
+    font-size: 0.85rem;
+}
+
+.stat-percent {
+    position: absolute;
+    right: 0.8rem;
+    top: 0.5rem; /* bottom から top に変更して重なりを避ける */
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    z-index: 1; /* ボタンより下の層に配置 */
+}
+
+/* 派生能力値 */
+.derived-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.derived-stat {
+    background-color: var(--table-row-bg);
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.derived-stat label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.with-unit {
+    display: flex;
+    align-items: center;
+}
+
+.unit {
+    margin-left: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* 技能ポイント計算セクション */
+.skill-points-section {
+    background-color: var(--table-row-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.skill-points-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.skill-points-table th, 
+.skill-points-table td {
+    padding: 0.6rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.skill-points-table th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+}
+
+/* スキルカテゴリーのアコーディオン */
+.skill-category {
+    margin-bottom: 1.5rem;
+}
+
+.skill-category-header {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.skill-category-header:hover {
+    background-color: var(--accent-color);
+}
+
+.skill-category-content {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* 技能テーブル */
+.skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.skill-table th {
+    background-color: var(--table-header-bg);
+    padding: 0.8rem;
+    color: var(--text-color);
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.skill-table td {
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    background-color: var(--table-row-bg);
+}
+
+.skill-table tr:nth-child(even) td {
+    background-color: var(--table-row-alt-bg);
+}
+
+/* テーブル合計値セル */
+.total-cell {
+    font-weight: 700;
+    background-color: var(--accent-color) !important;
+    color: white !important;
+}
+
+/* テーブル内入力フィールド */
+.skill-table input,
+.skill-points-table input {
+    width: 100%;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.4rem;
+    text-align: center;
+}
+
+/* 旧・技能スタイル */
+.skill-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .skill-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .skill-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.skill-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skill-item {
+    position: relative;
+}
+
+.skill-item label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.skill-item .input {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+/* 戦闘タブ */
+.combat-section {
+    margin-bottom: 2rem;
+    background-color: var(--table-row-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.combat-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.combat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.combat-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 2fr 2fr 2fr 2fr;
+    background-color: var(--table-header-bg);
+    padding: 0.8rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    border-radius: 4px 4px 0 0;
+    border: 1px solid var(--border-color);
+}
+
+.combat-header > div {
+    padding: 0 0.3rem;
+}
+
+.combat-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 2fr 2fr 2fr 2fr;
+    padding: 0.8rem 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    transition: background-color 0.2s ease;
+    background-color: var(--table-row-bg);
+}
+
+.combat-row:hover {
+    background-color: rgba(142, 68, 173, 0.05);
+}
+
+.combat-row:nth-child(even) {
+    background-color: var(--table-row-alt-bg);
+}
+
+.combat-row:last-child {
+    border-bottom: none;
+}
+
+.combat-row > div {
+    padding: 0 0.3rem;
+}
+
+.col-percent input {
+    width: 100%;
+    text-align: center;
+}
+
+/* プレビュータブ */
+.preview-sheet {
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--panel-bg);
+}
+
+.sheet-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .sheet-header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.sheet-title h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.sheet-info {
+    flex: 1;
+}
+
+.sheet-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.sheet-row-2 {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.sheet-col {
+    display: flex;
+    flex: 1;
+}
+
+.sheet-label {
+    font-weight: 600;
+    min-width: 120px;
+    color: var(--text-color);
+}
+
+.sheet-value {
+    flex: 1;
+    color: var(--text-color);
+}
+
+.sheet-stats {
+    margin-bottom: 1.5rem;
+}
+
+.sheet-stats h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--text-color);
+}
+
+.stat-table {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-collapse: collapse;
+    background-color: var(--table-row-bg);
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-cell {
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.sheet-skills-preview {
+    margin-bottom: 1.5rem;
+}
+
+.sheet-skills-preview h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--text-color);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.skills-column {
+    background-color: var(--table-row-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.skills-column h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.skill-preview-item {
+    display: flex;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px dotted var(--border-color);
+}
+
+.skill-preview-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.skill-name {
+    font-weight: 500;
+    min-width: 120px;
+    color: var(--text-color);
+}
+
+.skill-value {
+    flex: 1;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    margin-top: 2rem;
+    background-color: var(--panel-bg);
+    border-radius: 0 0 8px 8px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+/* PDF生成用スタイル */
+#pdf-container {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
+.pdf-input-overlay {
+    position: absolute;
+    background: transparent;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+    pointer-events: none;
+}
+
+/* アニメーション */
+@keyframes roll {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(72deg); }
+    40% { transform: rotate(144deg); }
+    60% { transform: rotate(216deg); }
+    80% { transform: rotate(288deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.rolling {
+    animation: roll 0.5s ease;
+}
+
+/* モーダルスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: var(--panel-bg);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 50%;
+    max-width: 500px;
+    color: var(--text-color);
+}
+
+.close {
+    color: var(--text-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--accent-color);
+}
+
+.modal .form-group {
+    margin-bottom: 15px;
+}
+
+.modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.modal .input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.modal .btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* 印刷用スタイル */
+@media print {
+    body {
+        background-color: white;
+    }
+    
+    .container {
+        padding: 0;
+        max-width: 100%;
+    }
+    
+    header, .controls, .tabs, footer {
+        display: none;
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    #preview {
+        display: block !important;
+    }
+    
+    .panel {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .preview-sheet {
+        border: none;
+    }
+}
+/* 画像アップロード関連のスタイル */
+.image-upload-container {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.image-input {
+    display: none;
+}
+
+.image-preview {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--table-row-bg);
+    transition: all 0.3s ease;
+}
+
+.image-preview:hover {
+    border-color: var(--accent-color);
+}
+
+.image-placeholder {
+    color: var(--text-color);
+    opacity: 0.7;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-remove-btn {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
