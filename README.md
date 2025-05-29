@@ -1,5 +1,3 @@
-はい、承知いたしました。提供されたHTML、CSS、JavaScriptファイルを分析し、プロジェクトのREADMEを作成します。
-
 ```markdown
 # 6版CoCTRPG キャラクター作成ツール
 
