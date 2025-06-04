@@ -497,12 +497,14 @@ function initializeCharacteristicFields() {
 function initializeSkillFields() {
     // 各技能フィールドを取得
     for (const skill in defaultSkills) {
+        // すべての技能をキャラクターデータにセット
+        character.skills[skill] = defaultSkills[skill];
+
         const element = $(skill);
         if (element) {
             // 初期値を設定
             element.value = defaultSkills[skill];
-            character.skills[skill] = defaultSkills[skill];
-            
+
             // イベントリスナーを追加
             element.addEventListener('input', () => {
                 updateSkill(skill);
