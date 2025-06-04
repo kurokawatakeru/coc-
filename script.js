@@ -741,17 +741,6 @@ function loadSavedCharacterList() {
     while (select.options.length > 1) {
         select.options.remove(1);
     }
-// 保存キャラクターリストの読み込み(続き)
-function loadSavedCharacterList() {
-    const savedCharacters = JSON.parse(localStorage.getItem('cocCharacters') || '{}');
-    const select = $('loadSelect');
-    
-    if (!select) return;
-    
-    // リストをクリア（最初の「保存データ読込...」以外）
-    while (select.options.length > 1) {
-        select.options.remove(1);
-    }
     
     // 保存されているキャラクターをリストに追加
     for (const name in savedCharacters) {
@@ -762,14 +751,6 @@ function loadSavedCharacterList() {
     }
 }
     
-    // 保存されているキャラクターをリストに追加
-    for (const name in savedCharacters) {
-        const option = document.createElement('option');
-        option.value = name;
-        option.textContent = name;
-        select.appendChild(option);
-    }
-}
 
 // キャラクターの読み込み
 function loadCharacter() {
