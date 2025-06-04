@@ -124,14 +124,16 @@ function $(id) {
 }
 
 // ページロード時の初期化
-document.addEventListener('DOMContentLoaded', () => {
-    initializeApp();
-});
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeApp();
+    });
+}
 
 // アプリケーションの初期化
 function initializeApp() {
     // ダークモード設定の読み込み
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) || 'light';
     if (savedTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         document.getElementById('themeSwitch').checked = true;
@@ -142,10 +144,14 @@ function initializeApp() {
         document.getElementById('themeSwitch').addEventListener('change', function(e) {
             if (e.target.checked) {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
+                if (typeof localStorage !== 'undefined') {
+                    localStorage.setItem('theme', 'dark');
+                }
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
+                if (typeof localStorage !== 'undefined') {
+                    localStorage.setItem('theme', 'light');
+                }
             }
         });
     }
