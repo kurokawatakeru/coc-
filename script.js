@@ -1880,3 +1880,8 @@ function addSkillToTable(skillName, baseValue, category) {
     // 初期値を設定
     updateSkillTotal(skillId);
 }
+
+// Node.js export for testing
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { rollDice, calculateDamageBonus };
+}
