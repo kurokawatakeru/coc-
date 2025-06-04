@@ -1688,11 +1688,13 @@ function updateSkillTotal(skillId) {
     
     const total = baseValue + occPoints + intPoints + growthPoints + otherPoints;
     $(`${skillId}-total`).textContent = total;
-    
+
+    // キャラクターデータを常に同期
+    character.skills[skillId] = total;
+
     // 表示されている技能値を更新
     if ($(skillId)) {
         $(skillId).value = total;
-        character.skills[skillId] = total;
     }
     
     // 回避技能の場合、DEXから計算される初期値を反映
