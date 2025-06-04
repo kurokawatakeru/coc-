@@ -109,7 +109,6 @@ const defaultSkills = {
     psychoanalysis: 1,     // 精神分析
     disguise: 1,           // 変装
     martialArts: 1,        // マーシャルアーツ
-    martialArts2: 1,       // 武道
     survival: 10,          // サバイバル
     pharmacy: 1,           // 薬学
     iaijutsu: 1,           // 居合
@@ -863,7 +862,7 @@ function updateImagePreview() {
 // スキルテーブルの更新
 function updateSkillTables() {
     // 戦闘技能
-    const combatSkills = ['dodge', 'kick', 'grapple', 'punch', 'headbutt', 'throw', 'martialArts', 'martialArts2'];
+    const combatSkills = ['dodge', 'kick', 'grapple', 'punch', 'headbutt', 'throw', 'martialArts'];
     
     combatSkills.forEach(skill => {
         if ($(`${skill}-base`)) {
@@ -1222,7 +1221,6 @@ async function generatePDF() {
             { x: 1020, y: 902, width: 35, height: 20, type: 'number', field: 'history' },// 歴史
             { x: 1020, y: 931, width: 35, height: 20, type: 'number', field: 'survival' },// サバイバル
             { x: 1020, y: 961, width: 35, height: 20, type: 'number', field: 'iaijutsu' },// 居合
-            { x: 1020, y: 990, width: 35, height: 20, type: 'number', field: 'martialArts2' },// 武道
             { x: 825, y: 1020, width: 130, height: 20, type: 'text', field: 'customSkill1Name' },// 追加技能書き込み場所
             { x: 1020, y: 1020, width: 35, height: 20, type: 'number', field: 'customSkill1' },// 追加技能書き込み場所の数値
             { x: 825, y: 1050, width: 130, height: 20, type: 'text', field: 'customSkill2Name' },// 追加技能書き込み場所
