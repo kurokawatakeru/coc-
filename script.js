@@ -359,7 +359,7 @@ function toggleAccordion(contentId, header) {
     const content = document.getElementById(contentId);
     if (!content) return;
     
-    const icon = header.querySelector('i.fas');
+    const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
     
     if (content.style.display === 'block') {
         content.style.display = 'none';
