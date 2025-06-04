@@ -305,7 +305,19 @@ function initAccordions() {
             toggleAccordion('investigateSkillsContent', this);
         });
     }
-    
+
+    if (document.getElementById('actionSkillsHeader')) {
+        document.getElementById('actionSkillsHeader').addEventListener('click', function() {
+            toggleAccordion('actionSkillsContent', this);
+        });
+    }
+
+    if (document.getElementById('negotiationSkillsHeader')) {
+        document.getElementById('negotiationSkillsHeader').addEventListener('click', function() {
+            toggleAccordion('negotiationSkillsContent', this);
+        });
+    }
+
     if (document.getElementById('knowledgeSkillsHeader')) {
         document.getElementById('knowledgeSkillsHeader').addEventListener('click', function() {
             toggleAccordion('knowledgeSkillsContent', this);
@@ -327,6 +339,12 @@ function initAccordions() {
     }
     if (document.getElementById('investigateSkillsContent')) {
         document.getElementById('investigateSkillsContent').style.display = 'block';
+    }
+    if (document.getElementById('actionSkillsContent')) {
+        document.getElementById('actionSkillsContent').style.display = 'block';
+    }
+    if (document.getElementById('negotiationSkillsContent')) {
+        document.getElementById('negotiationSkillsContent').style.display = 'block';
     }
     if (document.getElementById('knowledgeSkillsContent')) {
         document.getElementById('knowledgeSkillsContent').style.display = 'block';
