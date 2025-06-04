@@ -863,7 +863,7 @@ function updateImagePreview() {
 // スキルテーブルの更新
 function updateSkillTables() {
     // 戦闘技能
-    const combatSkills = ['dodge', 'kick', 'grapple', 'punch', 'headbutt', 'throw', 'martialArts'];
+    const combatSkills = ['dodge', 'kick', 'grapple', 'punch', 'headbutt', 'throw', 'martialArts', 'martialArts2'];
     
     combatSkills.forEach(skill => {
         if ($(`${skill}-base`)) {
