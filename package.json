@@ -1,0 +1,20 @@
+{
+  "name": "coc-",
+  "version": "1.0.0",
+  "description": "「6版CoCTRPG キャラクター作成ツール」は、テーブルトップロールプレイングゲーム「クトゥルフ神話TRPG（第6版）」の探索者（キャラクター）をウェブブラウザ上で手軽に作成・管理するためのツールです。 能力値のダイスロール、各種派生値の自動計算、技能ポイントの割り振り、キャラクターデータの保存・読み込み、PDF出力など、キャラクター作成を支援する多彩な機能を備えています。",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.0.0-beta.3"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
