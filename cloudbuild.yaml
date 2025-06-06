@@ -1,0 +1,14 @@
+steps:
+  # Dockerイメージをビルドするステップ
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      # 'gcr.io/プロジェクトID/任意のイメージ名:タグ' の形式で有効な名前を指定
+      - 'gcr.io/${PROJECT_ID}/coc-character-sheet:latest'
+      # カレントディレクトリをビルドのコンテキストとして指定
+      - '.'
+
+# ビルドしたイメージをGoogle Container Registryにプッシュする
+images:
+  - 'gcr.io/${PROJECT_ID}/coc-character-sheet:latest'
