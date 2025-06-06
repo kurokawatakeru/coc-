@@ -1206,8 +1206,7 @@ function parseIaCharacterText(text) {
         '天文学': 'astronomy',
         '博物学': 'naturalHistory',
         '物理学': 'physics',
-        '法律': 'law',
-        '薬学': 'pharmacy',
+        '法律': 'pharmacy',
         '歴史': 'history'
     };
 
