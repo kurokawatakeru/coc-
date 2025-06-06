@@ -1506,9 +1506,25 @@ async function generatePDF() {
             // 画像をPDFに追加
             pdf.addImage(imgData, 'PNG', 0, 0, pageWidth, pageHeight);
             
+            // 生成したPDFをBlobとして取得
+            const pdfBlob = pdf.output('blob');
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+
+            // 新しいウィンドウでPDFを開いて印刷
+            const printWindow = window.open(pdfUrl, '_blank');
+            if (printWindow) {
+                printWindow.addEventListener('load', () => {
+                    printWindow.focus();
+                    printWindow.print();
+                    URL.revokeObjectURL(pdfUrl);
+                });
+            } else {
+                alert('ポップアップブロックにより印刷ウィンドウを開けませんでした。');
+            }
+
             // PDF保存
             pdf.save(`${character.name}_キャラクターシート.pdf`);
-            
+
             // 成功メッセージ
             alert('PDFを生成しました！');
         } catch (error) {
