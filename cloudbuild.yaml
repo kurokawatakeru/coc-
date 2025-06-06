@@ -12,3 +12,6 @@ steps:
 # ビルドしたイメージをGoogle Container Registryにプッシュする
 images:
   - 'gcr.io/${PROJECT_ID}/coc-character-sheet:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
