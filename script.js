@@ -1042,18 +1042,25 @@ function exportCharacter() {
 function importCharacter(event) {
     const file = event.target.files[0];
     if (!file) return;
-    
-    // ファイル拡張子チェック
-    if (!file.name.endsWith('.json')) {
-        alert('JSONファイル(.json)を選択してください。');
+
+    // ファイル拡張子チェック (.json または .txt を許可)
+    const lowerName = file.name.toLowerCase();
+    if (!lowerName.endsWith('.json') && !lowerName.endsWith('.txt')) {
+        alert('JSONファイル(.json)またはテキストファイル(.txt)を選択してください。');
         return;
     }
-    
+
     const reader = new FileReader();
     reader.onload = function(e) {
         try {
-            // JSONデータをパース
-            const importedCharacter = JSON.parse(e.target.result);
+            let importedCharacter;
+            if (lowerName.endsWith('.json')) {
+                // JSONデータをパース
+                importedCharacter = JSON.parse(e.target.result);
+            } else {
+                // いあきゃら形式のテキストをパース
+                importedCharacter = parseIaCharacterText(e.target.result);
+            }
             
             // バリデーション
             if (!importedCharacter.name) {
@@ -1120,9 +1127,133 @@ function importCharacter(event) {
     };
     
     reader.readAsText(file);
-    
+
     // ファイル選択をリセット
     event.target.value = '';
+}
+
+// いあきゃら形式テキストのパース
+function parseIaCharacterText(text) {
+    const abilityMap = {
+        'STR': 'str',
+        'CON': 'con',
+        'POW': 'pow',
+        'DEX': 'dex',
+        'APP': 'app',
+        'SIZ': 'siz',
+        'INT': 'int',
+        'EDU': 'edu',
+        'HP': 'hp',
+        'MP': 'mp',
+        'SAN': 'san',
+        'IDE': 'idea',
+        '幸運': 'luck',
+        '知識': 'knowledge'
+    };
+
+    const skillMap = {
+        '回避': 'dodge',
+        'キック': 'kick',
+        '組み付き': 'grapple',
+        'こぶし（パンチ）': 'punch',
+        '頭突き': 'headbutt',
+        '投擲': 'throw',
+        'マーシャルアーツ': 'martialArts',
+        '拳銃': 'handgun',
+        'サブマシンガン': 'submachineGun',
+        'ショットガン': 'shotgun',
+        'マシンガン': 'machineGun',
+        'ライフル': 'rifle',
+        '応急手当': 'firstAid',
+        '鍵開け': 'locksmith',
+        '隠す': 'conceal',
+        '隠れる': 'hide',
+        '聞き耳': 'listen',
+        '忍び歩き': 'sneak',
+        '写真術': 'photography',
+        '精神分析': 'psychoanalysis',
+        '追跡': 'track',
+        '登攀': 'climb',
+        '図書館': 'libraryUse',
+        '目星': 'spotHidden',
+        '運転': 'drive',
+        '機械修理': 'mechanicalRepair',
+        '重機械操作': 'operateHeavyMachinery',
+        '乗馬': 'ride',
+        '水泳': 'swim',
+        '操縦': 'pilot',
+        '跳躍': 'jump',
+        '電気修理': 'electricalRepair',
+        'ナビゲート': 'navigate',
+        '変装': 'disguise',
+        '言いくるめ': 'fastTalk',
+        '信用': 'creditRating',
+        '説得': 'persuade',
+        '値切り': 'bargain',
+        '医学': 'medicine',
+        'オカルト': 'occult',
+        '化学': 'chemistry',
+        'クトゥルフ神話': 'cthulhuMythos',
+        '芸術': 'art1',
+        '経理': 'accounting',
+        '考古学': 'archaeology',
+        'コンピューター': 'computer',
+        '心理学': 'psychology',
+        '人類学': 'anthropology',
+        '生物学': 'biology',
+        '地質学': 'geology',
+        '電子工学': 'electronics',
+        '天文学': 'astronomy',
+        '博物学': 'naturalHistory',
+        '物理学': 'physics',
+        '法律': 'law',
+        '薬学': 'pharmacy',
+        '歴史': 'history'
+    };
+
+    // 基本は現在のcharacterをクローン
+    const clone = JSON.parse(JSON.stringify(character));
+
+    const lines = text.split(/\r?\n/);
+    for (const line of lines) {
+        if (line.startsWith('名前:')) {
+            clone.name = line.replace(/^名前:\s*/, '').split(/[\s(]/)[0].trim();
+        } else if (line.startsWith('職業:')) {
+            clone.occupation = line.replace(/^職業:\s*/, '').trim();
+        } else if (/年齢:/.test(line)) {
+            const m = line.match(/年齢:\s*(\d+)/);
+            if (m) clone.age = m[1];
+            const g = line.match(/性別:\s*([^/]+)/);
+            if (g) clone.gender = g[1].trim();
+        } else if (/出身:/.test(line)) {
+            const m = line.match(/出身:\s*([^\s]+)/);
+            if (m) clone.origin = m[1];
+        } else if (/^DB\s*/.test(line)) {
+            const m = line.match(/DB\s*(.+)/);
+            if (m) clone.db = m[1].trim();
+        }
+
+        // 能力値
+        for (const key in abilityMap) {
+            const reg = new RegExp('^' + key + '\\s+(\\d+)');
+            const m = line.match(reg);
+            if (m) {
+                clone[abilityMap[key]] = parseInt(m[1], 10);
+            }
+        }
+
+        // 技能値
+        for (const jSkill in skillMap) {
+            const reg = new RegExp('^' + jSkill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s+(\\d+)');
+            const m = line.match(reg);
+            if (m) {
+                if (!clone.skills) clone.skills = {};
+                clone.skills[skillMap[jSkill]] = parseInt(m[1], 10);
+            }
+        }
+    }
+
+    return clone;
 }
 
 // PDF生成処理（完全版）
