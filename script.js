@@ -2044,10 +2044,6 @@ function updateSkillTotal(skillId) {
         $(skillId).value = total;
     }
     
-    // 回避技能の場合、DEXから計算される初期値を反映
-    if (skillId === 'dodge') {
-        updateDodgeBaseValue();
-    }
 }
 
 // 回避技能の初期値更新（DEXの2倍）
