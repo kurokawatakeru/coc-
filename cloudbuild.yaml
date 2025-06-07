@@ -5,13 +5,13 @@ steps:
       - 'build'
       - '-t'
       # Artifact Registryを使用 (Cloud Runの推奨)
-      - 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/coc-character-sheet:latest'
+      - 'asia-northeast1-docker.pkg.dev/cocprojects/cloud-run-source-deploy/coc-character-sheet:latest'
       # カレントディレクトリをビルドのコンテキストとして指定
       - '.'
 
 # ビルドしたイメージをArtifact Registryにプッシュする
 images:
-  - 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/coc-character-sheet:latest'
+  - 'asia-northeast1-docker.pkg.dev/cocprojects/cloud-run-source-deploy/coc-character-sheet:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
