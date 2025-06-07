@@ -4,14 +4,14 @@ steps:
     args:
       - 'build'
       - '-t'
-      # 'gcr.io/プロジェクトID/任意のイメージ名:タグ' の形式で有効な名前を指定
-      - 'gcr.io/${PROJECT_ID}/coc-character-sheet:latest'
+      # Artifact Registryを使用 (Cloud Runの推奨)
+      - 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/coc-character-sheet:latest'
       # カレントディレクトリをビルドのコンテキストとして指定
       - '.'
 
-# ビルドしたイメージをGoogle Container Registryにプッシュする
+# ビルドしたイメージをArtifact Registryにプッシュする
 images:
-  - 'gcr.io/${PROJECT_ID}/coc-character-sheet:latest'
+  - 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/coc-character-sheet:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
