@@ -2,10 +2,11 @@
 
 import { $ } from './utils.js';
 import { defaultSkills } from './constants.js';
-import { character } from './app.js';
 
 // キャラクターシート印刷（背景画像を利用）
 export async function printCharacterSheet() {
+    const { character } = await import('./app.js');
+    
     try {
         if (!character.name) {
             alert('印刷には探索者名が必要です。');
@@ -129,7 +130,7 @@ export async function printCharacterSheet() {
             pdfContainer.removeChild(pdfContainer.lastChild);
         }
 
-        collectCustomFieldData();
+        await collectCustomFieldData();
 
         inputAreas.forEach(area => {
             if (!area.field) return;
@@ -219,7 +220,9 @@ export async function generatePDF() {
 }
 
 // カスタムフィールドデータの収集
-export function collectCustomFieldData() {
+export async function collectCustomFieldData() {
+    const { character } = await import('./app.js');
+    
     // HTML側で定義されたカスタムフィールドをキャラクターモデルに反映
     const customFields = [
         'art1Name', 'art2Name', 'craft1Name', 'craft2Name',

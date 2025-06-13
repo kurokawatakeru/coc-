@@ -38,4 +38,12 @@ export async function updatePreview() {
             $(`preview-${skill}`).textContent = `${character.skills[skill]}%`;
         }
     }
+    
+    // カスタムフィールド名の表示
+    if ($('preview-art1Name') && character.art1Name) {
+        $('preview-art1Name').textContent = character.art1Name;
+    }
+    if ($('preview-craft1Name') && character.craft1Name) {
+        $('preview-craft1Name').textContent = character.craft1Name;
+    }
 }
