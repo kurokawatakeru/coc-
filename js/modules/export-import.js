@@ -9,7 +9,7 @@ import { updateImagePreview } from './data-management.js';
 import { defaultSkills } from './constants.js';
 
 // キャラクターデータのエクスポート
-export function exportCharacter() {
+export async function exportCharacter() {
     // app.jsからcharacterを取得
     const { character } = await import('./app.js');
     
