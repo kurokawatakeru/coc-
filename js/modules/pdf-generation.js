@@ -30,110 +30,110 @@ export async function printCharacterSheet() {
             if (characterSheetImg.complete) resolve();
         });
 
-        // 入力エリアの座標定義 (提供された詳細なリスト)
+        // 入力エリアの座標定義 (提供された詳細なリスト) - 座標を右に10ピクセル移動
         const inputAreas = [
-            { x: 800, y: 510, width: 270, height: 290, type: 'image', field: 'characterImage' }, //画像
-            { x: 311, y: 60, width: 173, height: 22, type: 'text', field: 'name' },  // 探索者名
-            { x: 312, y: 92, width: 172, height: 22, type: 'text', field: 'occupation' },  // 職業
-            { x: 327, y: 124, width: 156, height: 24, type: 'text', field: 'school' }, // 学校・学位
-            { x: 272, y: 162, width: 203, height: 25, type: 'text', field: 'origin' }, // 出身
-            { x: 273, y: 198, width: 61, height: 25, type: 'text', field: 'gender' },  // 性別
-            { x: 398, y: 200, width: 44, height: 21, type: 'number', field: 'age' },// 年齢
-            { x: 610, y: 90, width: 35, height: 25, type: 'number', field: 'str' }, // STR
-            { x: 654, y: 95, width: 35, height: 20, type: 'number', field: 'strPercent' }, // STR✖️5
-            { x: 762, y: 91, width: 35, height: 20, type: 'number', field: 'dex' }, // DEX
-            { x: 815, y: 95, width: 35, height: 20, type: 'number', field: 'dexPercent' }, // DEX✖️5
-            { x: 925, y: 90, width: 35, height: 20, type: 'number', field: 'int' }, // INT
-            { x: 1031, y: 91, width: 35, height: 20, type: 'number', field: 'idea' },// アイデア
-            { x: 610, y: 126, width: 35, height: 20, type: 'number', field: 'con' },// CON
-            { x: 654, y: 130, width: 35, height: 20, type: 'number', field: 'conPercent' }, // CON✖️5
-            { x: 762, y: 126, width: 35, height: 20, type: 'number', field: 'app' },// APP
-            { x: 815, y: 130, width: 35, height: 20, type: 'number', field: 'appPercent' }, // APP✖️5
-            { x: 925, y: 127, width: 35, height: 20, type: 'number', field: 'pow' },// POW
-            { x: 1021, y: 128, width: 35, height: 20, type: 'number', field: 'luck' },// 幸運
-            { x: 610, y: 160, width: 35, height: 20, type: 'number', field: 'siz' },// SIZ
-            { x: 654, y: 165, width: 35, height: 20, type: 'number', field: 'sizPercent' }, // SIZ✖️5
-            { x: 540, y: 516, width: 35, height: 18, type: 'number', field: 'eduSkillPoints' },// 職業技能
-            { x: 761, y: 162, width: 35, height: 20, type: 'number', field: 'san' },// SAN
-            { x: 1020, y: 162, width: 35, height: 20, type: 'number', field: 'knowledge' },// 知識    
-            { x: 925, y: 163, width: 35, height: 20, type: 'number', field: 'edu' },// EDU
-            { x: 710, y: 516, width: 35, height: 18, type: 'number', field: 'intSkillPoints' },//任意
-            { x: 440, y: 549, width: 35, height: 20, type: 'number', field: 'fastTalk' },// 言いくるめ
-            { x: 440, y: 577, width: 35, height: 20, type: 'number', field: 'medicine' },//医学
-            { x: 440, y: 607, width: 35, height: 20, type: 'number', field: 'drive' },//運転(自動車)
-            { x: 440, y: 637, width: 35, height: 20, type: 'number', field: 'driveOther' },// 運転()
-            { x: 440, y: 666, width: 35, height: 20, type: 'number', field: 'firstAid' },// 応急手当て
-            { x: 440, y: 695, width: 35, height: 20, type: 'number', field: 'occult' },// オカルト
-            { x: 440, y: 725, width: 35, height: 20, type: 'number', field: 'dodge' },// 回避
-            { x: 440, y: 754, width: 35, height: 20, type: 'number', field: 'chemistry' },// 化学
-            { x: 440, y: 784, width: 35, height: 20, type: 'number', field: 'locksmith' },// 鍵開け
-            { x: 440, y: 813, width: 35, height: 20, type: 'number', field: 'conceal' },// 隠す
-            { x: 440, y: 843, width: 35, height: 20, type: 'number', field: 'hide' },// 隠れる
-            { x: 440, y: 873, width: 35, height: 20, type: 'number', field: 'mechanicalRepair' },// 機械修理
-            { x: 440, y: 903, width: 35, height: 20, type: 'number', field: 'listen' },// 聞き耳
-            { x: 440, y: 932, width: 35, height: 20, type: 'number', field: 'cthulhuMythos' },// クトゥルフ神話
-            { x: 440, y: 961, width: 35, height: 20, type: 'number', field: 'art1' },// 芸術()
-            { x: 290, y: 964, width: 70, height: 20, type: 'text', field: 'art1Name' },// 芸術()
-            { x: 440, y: 991, width: 35, height: 20, type: 'number', field: 'art2' },// 芸術()
-            { x: 290, y: 995, width: 70, height: 20, type: 'text', field: 'art2Name' },// 芸術()
-            { x: 440, y: 1021, width: 35, height: 20, type: 'number', field: 'accounting' },// 経理
-            { x: 440, y: 1050, width: 35, height: 20, type: 'number', field: 'archaeology' },// 考古学
-            { x: 440, y: 1080, width: 35, height: 20, type: 'number', field: 'computer' },// コンピューター
-            { x: 440, y: 1110, width: 35, height: 20, type: 'number', field: 'sneak' },// 忍び歩き
-            { x: 440, y: 1139, width: 35, height: 20, type: 'number', field: 'photography' },// 写真術
-            { x: 440, y: 1168, width: 35, height: 20, type: 'number', field: 'operateHeavyMachinery' },// 重機械操作
-            { x: 440, y: 1198, width: 35, height: 20, type: 'number', field: 'ride' },// 乗馬
-            { x: 440, y: 1227, width: 35, height: 20, type: 'number', field: 'creditRating' },// 信用
-            { x: 440, y: 1256, width: 35, height: 20, type: 'number', field: 'psychology' },// 心理学
-            { x: 440, y: 1287, width: 35, height: 20, type: 'number', field: 'anthropology' },// 人類学
-            { x: 730, y: 549, width: 35, height: 20, type: 'number', field: 'swim' },//水泳
-            { x: 730, y: 579, width: 35, height: 20, type: 'number', field: 'craft1' },// 制作()
-            { x: 580, y: 582, width: 70, height: 20, type: 'text', field: 'craft1Name' },// 制作()
-            { x: 730, y: 607, width: 35, height: 20, type: 'number', field: 'craft2' },// 制作()
-            { x: 730, y: 637, width: 35, height: 20, type: 'number', field: 'psychoanalysis' },// 精神分析
-            { x: 730, y: 667, width: 35, height: 20, type: 'number', field: 'biology' },// 生物学
-            { x: 730, y: 697, width: 35, height: 20, type: 'number', field: 'persuade' },// 説得
-            { x: 730, y: 726, width: 35, height: 20, type: 'number', field: 'pilot1' },// 操縦()
-            { x: 730, y: 755, width: 35, height: 20, type: 'number', field: 'pilot2' },// 操縦()
-            { x: 730, y: 784, width: 35, height: 20, type: 'number', field: 'geology' },// 地質学
-            { x: 730, y: 814, width: 35, height: 20, type: 'number', field: 'jump' },// 跳躍
-            { x: 730, y: 844, width: 35, height: 20, type: 'number', field: 'track' },// 追跡
-            { x: 730, y: 873, width: 35, height: 20, type: 'number', field: 'electricalRepair' },// 電気修理
-            { x: 730, y: 902, width: 35, height: 20, type: 'number', field: 'electronics' },// 電子工学
-            { x: 730, y: 931, width: 35, height: 20, type: 'number', field: 'astronomy' },// 天文学
-            { x: 730, y: 961, width: 35, height: 20, type: 'number', field: 'throw' },// 投擲
-            { x: 730, y: 990, width: 35, height: 20, type: 'number', field: 'climb' },// 登攀
-            { x: 730, y: 1020, width: 35, height: 20, type: 'number', field: 'libraryUse' },// 図書館
-            { x: 730, y: 1050, width: 35, height: 20, type: 'number', field: 'navigate' },// ナビゲート
-            { x: 730, y: 1079, width: 35, height: 20, type: 'number', field: 'bargain' },// 値切り
-            { x: 730, y: 1110, width: 35, height: 20, type: 'number', field: 'naturalHistory' },// 博物学
-            { x: 730, y: 1138, width: 35, height: 20, type: 'number', field: 'physics' },// 物理学
-            { x: 730, y: 1168, width: 35, height: 20, type: 'number', field: 'disguise' },// 変装
-            { x: 730, y: 1198, width: 35, height: 20, type: 'number', field: 'law' },// 法律
-            { x: 730, y: 1227, width: 35, height: 20, type: 'number', field: 'otherLanguage1' },// 他の言語
-            { x: 730, y: 1256, width: 35, height: 20, type: 'number', field: 'otherLanguage2' },// 他の言語
-            { x: 730, y: 1286, width: 35, height: 20, type: 'number', field: 'ownLanguage' },// 母国語
-            { x: 1020, y: 815, width: 35, height: 20, type: 'number', field: 'martialArts' },// マーシャルアーツ
-            { x: 1020, y: 844, width: 35, height: 20, type: 'number', field: 'spotHidden' },// 目星
-            { x: 1020, y: 874, width: 35, height: 20, type: 'number', field: 'pharmacy' },// 薬学
-            { x: 1020, y: 902, width: 35, height: 20, type: 'number', field: 'history' },// 歴史
-            { x: 1020, y: 931, width: 35, height: 20, type: 'number', field: 'survival' },// サバイバル
-            { x: 1020, y: 961, width: 35, height: 20, type: 'number', field: 'iaijutsu' },// 居合
-            { x: 825, y: 1020, width: 130, height: 20, type: 'text', field: 'customSkill1Name' },// 追加技能書き込み場所
-            { x: 1020, y: 1020, width: 35, height: 20, type: 'number', field: 'customSkill1' },// 追加技能書き込み場所の数値
-            { x: 825, y: 1050, width: 130, height: 20, type: 'text', field: 'customSkill2Name' },// 追加技能書き込み場所
-            { x: 1020, y: 1050, width: 35, height: 20, type: 'number', field: 'customSkill2' },// 追加技能書き込み場所の数値
-            { x: 1020, y: 1138, width: 35, height: 20, type: 'number', field: 'handgun' },// 拳銃
-            { x: 1020, y: 1168, width: 35, height: 20, type: 'number', field: 'submachineGun' },// サブマシンガン
-            { x: 1020, y: 1198, width: 35, height: 20, type: 'number', field: 'shotgun' },// ショットガン
-            { x: 1020, y: 1228, width: 35, height: 20, type: 'number', field: 'machineGun' },// マシンガン
-            { x: 1020, y: 1257, width: 35, height: 20, type: 'number', field: 'rifle' },// ライフル
-            { x: 825, y: 1288, width: 130, height: 20, type: 'text', field: 'customFirearmName' },// 火器系の技能書き込み場所
-            { x: 1020, y: 1288, width: 35, height: 20, type: 'number', field: 'customFirearm' },// 火器系の技能書き込み場所の数値
-            { x: 235, y: 1410, width: 30, height: 20, type: 'number', field: 'kick' },//キック
-            { x: 235, y: 1438, width: 30, height: 20, type: 'number', field: 'grapple' },//組みつき
-            { x: 235, y: 1464, width: 30, height: 20, type: 'number', field: 'punch' },//こぶし
-            { x: 235, y: 1489, width: 30, height: 20, type: 'number', field: 'headbutt' },//頭突き
+            { x: 810, y: 510, width: 270, height: 290, type: 'image', field: 'characterImage' }, //画像
+            { x: 321, y: 60, width: 173, height: 22, type: 'text', field: 'name' },  // 探索者名
+            { x: 322, y: 92, width: 172, height: 22, type: 'text', field: 'occupation' },  // 職業
+            { x: 337, y: 124, width: 156, height: 24, type: 'text', field: 'school' }, // 学校・学位
+            { x: 282, y: 162, width: 203, height: 25, type: 'text', field: 'origin' }, // 出身
+            { x: 283, y: 198, width: 61, height: 25, type: 'text', field: 'gender' },  // 性別
+            { x: 408, y: 200, width: 44, height: 21, type: 'number', field: 'age' },// 年齢
+            { x: 620, y: 90, width: 35, height: 25, type: 'number', field: 'str' }, // STR
+            { x: 664, y: 95, width: 35, height: 20, type: 'number', field: 'strPercent' }, // STR✖️5
+            { x: 772, y: 91, width: 35, height: 20, type: 'number', field: 'dex' }, // DEX
+            { x: 825, y: 95, width: 35, height: 20, type: 'number', field: 'dexPercent' }, // DEX✖️5
+            { x: 935, y: 90, width: 35, height: 20, type: 'number', field: 'int' }, // INT
+            { x: 1041, y: 91, width: 35, height: 20, type: 'number', field: 'idea' },// アイデア
+            { x: 620, y: 126, width: 35, height: 20, type: 'number', field: 'con' },// CON
+            { x: 664, y: 130, width: 35, height: 20, type: 'number', field: 'conPercent' }, // CON✖️5
+            { x: 772, y: 126, width: 35, height: 20, type: 'number', field: 'app' },// APP
+            { x: 825, y: 130, width: 35, height: 20, type: 'number', field: 'appPercent' }, // APP✖️5
+            { x: 935, y: 127, width: 35, height: 20, type: 'number', field: 'pow' },// POW
+            { x: 1031, y: 128, width: 35, height: 20, type: 'number', field: 'luck' },// 幸運
+            { x: 620, y: 160, width: 35, height: 20, type: 'number', field: 'siz' },// SIZ
+            { x: 664, y: 165, width: 35, height: 20, type: 'number', field: 'sizPercent' }, // SIZ✖️5
+            { x: 550, y: 516, width: 35, height: 18, type: 'number', field: 'eduSkillPoints' },// 職業技能
+            { x: 771, y: 162, width: 35, height: 20, type: 'number', field: 'san' },// SAN
+            { x: 1030, y: 162, width: 35, height: 20, type: 'number', field: 'knowledge' },// 知識    
+            { x: 935, y: 163, width: 35, height: 20, type: 'number', field: 'edu' },// EDU
+            { x: 720, y: 516, width: 35, height: 18, type: 'number', field: 'intSkillPoints' },//任意
+            { x: 450, y: 549, width: 35, height: 20, type: 'number', field: 'fastTalk' },// 言いくるめ
+            { x: 450, y: 577, width: 35, height: 20, type: 'number', field: 'medicine' },//医学
+            { x: 450, y: 607, width: 35, height: 20, type: 'number', field: 'drive' },//運転(自動車)
+            { x: 450, y: 637, width: 35, height: 20, type: 'number', field: 'driveOther' },// 運転()
+            { x: 450, y: 666, width: 35, height: 20, type: 'number', field: 'firstAid' },// 応急手当て
+            { x: 450, y: 695, width: 35, height: 20, type: 'number', field: 'occult' },// オカルト
+            { x: 450, y: 725, width: 35, height: 20, type: 'number', field: 'dodge' },// 回避
+            { x: 450, y: 754, width: 35, height: 20, type: 'number', field: 'chemistry' },// 化学
+            { x: 450, y: 784, width: 35, height: 20, type: 'number', field: 'locksmith' },// 鍵開け
+            { x: 450, y: 813, width: 35, height: 20, type: 'number', field: 'conceal' },// 隠す
+            { x: 450, y: 843, width: 35, height: 20, type: 'number', field: 'hide' },// 隠れる
+            { x: 450, y: 873, width: 35, height: 20, type: 'number', field: 'mechanicalRepair' },// 機械修理
+            { x: 450, y: 903, width: 35, height: 20, type: 'number', field: 'listen' },// 聞き耳
+            { x: 450, y: 932, width: 35, height: 20, type: 'number', field: 'cthulhuMythos' },// クトゥルフ神話
+            { x: 450, y: 961, width: 35, height: 20, type: 'number', field: 'art1' },// 芸術()
+            { x: 300, y: 964, width: 70, height: 20, type: 'text', field: 'art1Name' },// 芸術()
+            { x: 450, y: 991, width: 35, height: 20, type: 'number', field: 'art2' },// 芸術()
+            { x: 300, y: 995, width: 70, height: 20, type: 'text', field: 'art2Name' },// 芸術()
+            { x: 450, y: 1021, width: 35, height: 20, type: 'number', field: 'accounting' },// 経理
+            { x: 450, y: 1050, width: 35, height: 20, type: 'number', field: 'archaeology' },// 考古学
+            { x: 450, y: 1080, width: 35, height: 20, type: 'number', field: 'computer' },// コンピューター
+            { x: 450, y: 1110, width: 35, height: 20, type: 'number', field: 'sneak' },// 忍び歩き
+            { x: 450, y: 1139, width: 35, height: 20, type: 'number', field: 'photography' },// 写真術
+            { x: 450, y: 1168, width: 35, height: 20, type: 'number', field: 'operateHeavyMachinery' },// 重機械操作
+            { x: 450, y: 1198, width: 35, height: 20, type: 'number', field: 'ride' },// 乗馬
+            { x: 450, y: 1227, width: 35, height: 20, type: 'number', field: 'creditRating' },// 信用
+            { x: 450, y: 1256, width: 35, height: 20, type: 'number', field: 'psychology' },// 心理学
+            { x: 450, y: 1287, width: 35, height: 20, type: 'number', field: 'anthropology' },// 人類学
+            { x: 740, y: 549, width: 35, height: 20, type: 'number', field: 'swim' },//水泳
+            { x: 740, y: 579, width: 35, height: 20, type: 'number', field: 'craft1' },// 制作()
+            { x: 590, y: 582, width: 70, height: 20, type: 'text', field: 'craft1Name' },// 制作()
+            { x: 740, y: 607, width: 35, height: 20, type: 'number', field: 'craft2' },// 制作()
+            { x: 740, y: 637, width: 35, height: 20, type: 'number', field: 'psychoanalysis' },// 精神分析
+            { x: 740, y: 667, width: 35, height: 20, type: 'number', field: 'biology' },// 生物学
+            { x: 740, y: 697, width: 35, height: 20, type: 'number', field: 'persuade' },// 説得
+            { x: 740, y: 726, width: 35, height: 20, type: 'number', field: 'pilot1' },// 操縦()
+            { x: 740, y: 755, width: 35, height: 20, type: 'number', field: 'pilot2' },// 操縦()
+            { x: 740, y: 784, width: 35, height: 20, type: 'number', field: 'geology' },// 地質学
+            { x: 740, y: 814, width: 35, height: 20, type: 'number', field: 'jump' },// 跳躍
+            { x: 740, y: 844, width: 35, height: 20, type: 'number', field: 'track' },// 追跡
+            { x: 740, y: 873, width: 35, height: 20, type: 'number', field: 'electricalRepair' },// 電気修理
+            { x: 740, y: 902, width: 35, height: 20, type: 'number', field: 'electronics' },// 電子工学
+            { x: 740, y: 931, width: 35, height: 20, type: 'number', field: 'astronomy' },// 天文学
+            { x: 740, y: 961, width: 35, height: 20, type: 'number', field: 'throw' },// 投擲
+            { x: 740, y: 990, width: 35, height: 20, type: 'number', field: 'climb' },// 登攀
+            { x: 740, y: 1020, width: 35, height: 20, type: 'number', field: 'libraryUse' },// 図書館
+            { x: 740, y: 1050, width: 35, height: 20, type: 'number', field: 'navigate' },// ナビゲート
+            { x: 740, y: 1079, width: 35, height: 20, type: 'number', field: 'bargain' },// 値切り
+            { x: 740, y: 1110, width: 35, height: 20, type: 'number', field: 'naturalHistory' },// 博物学
+            { x: 740, y: 1138, width: 35, height: 20, type: 'number', field: 'physics' },// 物理学
+            { x: 740, y: 1168, width: 35, height: 20, type: 'number', field: 'disguise' },// 変装
+            { x: 740, y: 1198, width: 35, height: 20, type: 'number', field: 'law' },// 法律
+            { x: 740, y: 1227, width: 35, height: 20, type: 'number', field: 'otherLanguage1' },// 他の言語
+            { x: 740, y: 1256, width: 35, height: 20, type: 'number', field: 'otherLanguage2' },// 他の言語
+            { x: 740, y: 1286, width: 35, height: 20, type: 'number', field: 'ownLanguage' },// 母国語
+            { x: 1030, y: 815, width: 35, height: 20, type: 'number', field: 'martialArts' },// マーシャルアーツ
+            { x: 1030, y: 844, width: 35, height: 20, type: 'number', field: 'spotHidden' },// 目星
+            { x: 1030, y: 874, width: 35, height: 20, type: 'number', field: 'pharmacy' },// 薬学
+            { x: 1030, y: 902, width: 35, height: 20, type: 'number', field: 'history' },// 歴史
+            { x: 1030, y: 931, width: 35, height: 20, type: 'number', field: 'survival' },// サバイバル
+            { x: 1030, y: 961, width: 35, height: 20, type: 'number', field: 'iaijutsu' },// 居合
+            { x: 835, y: 1020, width: 130, height: 20, type: 'text', field: 'customSkill1Name' },// 追加技能書き込み場所
+            { x: 1030, y: 1020, width: 35, height: 20, type: 'number', field: 'customSkill1' },// 追加技能書き込み場所の数値
+            { x: 835, y: 1050, width: 130, height: 20, type: 'text', field: 'customSkill2Name' },// 追加技能書き込み場所
+            { x: 1030, y: 1050, width: 35, height: 20, type: 'number', field: 'customSkill2' },// 追加技能書き込み場所の数値
+            { x: 1030, y: 1138, width: 35, height: 20, type: 'number', field: 'handgun' },// 拳銃
+            { x: 1030, y: 1168, width: 35, height: 20, type: 'number', field: 'submachineGun' },// サブマシンガン
+            { x: 1030, y: 1198, width: 35, height: 20, type: 'number', field: 'shotgun' },// ショットガン
+            { x: 1030, y: 1228, width: 35, height: 20, type: 'number', field: 'machineGun' },// マシンガン
+            { x: 1030, y: 1257, width: 35, height: 20, type: 'number', field: 'rifle' },// ライフル
+            { x: 835, y: 1288, width: 130, height: 20, type: 'text', field: 'customFirearmName' },// 火器系の技能書き込み場所
+            { x: 1030, y: 1288, width: 35, height: 20, type: 'number', field: 'customFirearm' },// 火器系の技能書き込み場所の数値
+            { x: 245, y: 1410, width: 30, height: 20, type: 'number', field: 'kick' },//キック
+            { x: 245, y: 1438, width: 30, height: 20, type: 'number', field: 'grapple' },//組みつき
+            { x: 245, y: 1464, width: 30, height: 20, type: 'number', field: 'punch' },//こぶし
+            { x: 245, y: 1489, width: 30, height: 20, type: 'number', field: 'headbutt' },//頭突き
         ];
 
         while (pdfContainer.children.length > 1) {
