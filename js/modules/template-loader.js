@@ -28,14 +28,14 @@ export async function loadTemplates(templates) {
 // 主要なコンポーネントを読み込む
 export async function loadMainComponents() {
     const templates = [
-        { path: 'templates/components/header.html', target: 'header-container' },
-        { path: 'templates/components/tabs.html', target: 'tabs-container' },
-        { path: 'templates/components/basic-info-tab.html', target: 'basic-tab-container' },
-        { path: 'templates/components/skills-tab.html', target: 'skills-tab-container' },
-        { path: 'templates/components/combat-tab.html', target: 'combat-tab-container' },
-        { path: 'templates/components/preview-tab.html', target: 'preview-tab-container' },
-        { path: 'templates/components/footer.html', target: 'footer-container' },
-        { path: 'templates/components/pdf-container.html', target: 'pdf-container-wrapper' }
+        { path: 'templates/components/header.html', target: '#header-container' },
+        { path: 'templates/components/tabs.html', target: '#tabs-container' },
+        { path: 'templates/components/basic-info-tab.html', target: '#basic-tab-container' },
+        { path: 'templates/components/skills-tab.html', target: '#skills-tab-container' },
+        { path: 'templates/components/combat-tab.html', target: '#combat-tab-container' },
+        { path: 'templates/components/preview-tab.html', target: '#preview-tab-container' },
+        { path: 'templates/components/footer.html', target: '#footer-container' },
+        { path: 'templates/components/pdf-container.html', target: '#pdf-container-wrapper' }
     ];
     
     await loadTemplates(templates);
@@ -44,14 +44,14 @@ export async function loadMainComponents() {
 // 技能タブのサブコンポーネントを読み込む
 export async function loadSkillsSubComponents() {
     const skillTemplates = [
-        { path: 'templates/components/skill-points-section.html', target: 'skill-points-container' },
-        { path: 'templates/components/combat-skills-section.html', target: 'combat-skills-container' },
-        { path: 'templates/components/shooting-skills-section.html', target: 'shooting-skills-container' },
-        { path: 'templates/components/investigate-skills-section.html', target: 'investigate-skills-container' },
-        { path: 'templates/components/knowledge-skills-section.html', target: 'knowledge-skills-container' },
-        { path: 'templates/components/action-skills-section.html', target: 'action-skills-container' },
-        { path: 'templates/components/negotiation-skills-section.html', target: 'negotiation-skills-container' },
-        { path: 'templates/components/custom-fields-section.html', target: 'custom-fields-container' }
+        { path: 'templates/components/skill-points-section.html', target: '#skill-points-container' },
+        { path: 'templates/components/combat-skills-section.html', target: '#combat-skills-container' },
+        { path: 'templates/components/shooting-skills-section.html', target: '#shooting-skills-container' },
+        { path: 'templates/components/investigate-skills-section.html', target: '#investigate-skills-container' },
+        { path: 'templates/components/knowledge-skills-section.html', target: '#knowledge-skills-container' },
+        { path: 'templates/components/action-skills-section.html', target: '#action-skills-container' },
+        { path: 'templates/components/negotiation-skills-section.html', target: '#negotiation-skills-container' },
+        { path: 'templates/components/custom-fields-section.html', target: '#custom-fields-container' }
     ];
     
     await loadTemplates(skillTemplates);
