@@ -185,31 +185,111 @@ export async function printCharacterSheet() {
             pdfContainer.appendChild(input);
         });
 
+        // PDF生成コンテナを表示
         pdfContainer.style.display = 'block';
 
+        // html2canvasでキャンバスに変換
         const canvas = await html2canvas(pdfContainer, {
             scale: 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            backgroundColor: '#ffffff'
         });
 
+        // コンテナを非表示に戻す
         pdfContainer.style.display = 'none';
 
+        // キャンバスを画像データに変換
         const imgData = canvas.toDataURL('image/png');
 
-        const printWindow = window.open('', '_blank');
+        // 新しいウィンドウで印刷
+        const printWindow = window.open('', '_blank', 'width=800,height=600');
         if (printWindow) {
-            printWindow.document.write(`<img src="${imgData}" style="width:100%;height:auto;">`);
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>キャラクターシート印刷</title>
+                    <style>
+                        body { margin: 0; padding: 0; }
+                        img { max-width: 100%; height: auto; }
+                        @media print {
+                            body { margin: 0; }
+                            img { width: 100%; page-break-inside: avoid; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <img src="${imgData}" alt="キャラクターシート" />
+                    <script>
+                        window.onload = function() {
+                            setTimeout(function() {
+                                window.print();
+                            }, 500);
+                        };
+                    </script>
+                </body>
+                </html>
+            `);
             printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
         } else {
-            alert('ポップアップブロックにより印刷ウィンドウを開けませんでした。');
+            alert('ポップアップブロックにより印刷ウィンドウを開けませんでした。ポップアップを許可してください。');
         }
     } catch (error) {
         console.error('印刷エラー:', error);
         alert(`印刷中にエラーが発生しました: ${error.message}`);
+    }
+}
+
+// 簡易印刷機能（代替案）
+export async function printCharacterSheetSimple() {
+    const { character } = await import('./app.js');
+    
+    if (!character.name) {
+        alert('印刷には探索者名が必要です。');
+        return;
+    }
+
+    // プレビュータブの内容を印刷
+    const previewContent = document.querySelector('#preview .panel');
+    if (!previewContent) {
+        alert('プレビューコンテンツが見つかりません。');
+        return;
+    }
+
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${character.name} - キャラクターシート</title>
+                <style>
+                    body { font-family: 'Noto Sans JP', sans-serif; margin: 20px; }
+                    .panel { background: white; }
+                    .sheet-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #8e44ad; padding-bottom: 10px; }
+                    .sheet-row, .sheet-row-2 { margin: 5px 0; }
+                    .sheet-label { font-weight: bold; color: #8e44ad; }
+                    .stat-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0; }
+                    .stat-cell { padding: 5px; border: 1px solid #ddd; }
+                    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+                    .skills-column h4 { color: #8e44ad; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+                    .skill-preview-item { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid #eee; }
+                    @media print { body { margin: 0; } }
+                </style>
+            </head>
+            <body>
+                ${previewContent.innerHTML}
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => {
+            printWindow.print();
+        }, 500);
+    } else {
+        alert('ポップアップブロックにより印刷ウィンドウを開けませんでした。');
     }
 }
 
