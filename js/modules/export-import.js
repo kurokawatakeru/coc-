@@ -92,12 +92,34 @@ export async function importCharacter(event) {
             }
             
             // 派生能力値
-            updateDerivedStats();
+            await updateDerivedStats();
             
-            // 技能値
-            for (const skill in defaultSkills) {
-                if ($(skill)) {
-                    $(skill).value = character.skills[skill] || defaultSkills[skill];
+            // 技能値を反映
+            if (character.skills) {
+                // 全技能をフォームに反映
+                for (const skill in character.skills) {
+                    if ($(skill)) {
+                        $(skill).value = character.skills[skill];
+                    }
+                    // スキルテーブルの合計値も更新
+                    if ($(`${skill}-total`)) {
+                        $(`${skill}-total`).textContent = character.skills[skill];
+                    }
+                }
+                
+                // defaultSkillsにないスキルも反映
+                for (const skill in defaultSkills) {
+                    if ($(skill) && character.skills[skill] !== undefined) {
+                        $(skill).value = character.skills[skill];
+                        if ($(`${skill}-total`)) {
+                            $(`${skill}-total`).textContent = character.skills[skill];
+                        }
+                    } else if ($(skill)) {
+                        $(skill).value = defaultSkills[skill];
+                        if ($(`${skill}-total`)) {
+                            $(`${skill}-total`).textContent = defaultSkills[skill];
+                        }
+                    }
                 }
             }
             
@@ -114,16 +136,16 @@ export async function importCharacter(event) {
             });
             
             // 画像を反映
-            updateImagePreview();
+            await updateImagePreview();
             
             // プレビュー更新
-            updatePreview();
+            await updatePreview();
             
             // 技能ポイント計算の更新
             updateSkillPoints();
             
             // スキルテーブルの更新
-            updateSkillTables();
+            await updateSkillTables();
             
             alert(`「${character.name}」をインポートしました。`);
             
