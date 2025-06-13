@@ -1,0 +1,266 @@
+<!-- 基本情報タブ -->
+<div id="basic" class="tab-content active">
+    <div class="grid-2">
+        <!-- 個人情報 -->
+        <div class="panel">
+            <h2><i class="fas fa-user"></i> 探索者情報</h2>
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label for="name">探索者名</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        class="input"
+                        placeholder="名前を入力">
+                </div>
+                <div class="form-group">
+                    <label for="occupation">職業</label>
+                    <input 
+                        type="text" 
+                        id="occupation" 
+                        name="occupation" 
+                        class="input"
+                        placeholder="探偵、医者など">
+                </div>
+                <div class="form-group">
+                    <label for="school">学校・学位</label>
+                    <input 
+                        type="text" 
+                        id="school" 
+                        name="school" 
+                        class="input"
+                        placeholder="ミスカトニック大学など">
+                </div>
+                <div class="form-group">
+                    <label for="origin">出身</label>
+                    <input 
+                        type="text" 
+                        id="origin" 
+                        name="origin" 
+                        class="input"
+                        placeholder="アーカム市など">
+                </div>
+                <div class="form-group">
+                    <label for="gender">性別</label>
+                    <input 
+                        type="text" 
+                        id="gender" 
+                        name="gender" 
+                        class="input"
+                        placeholder="男性/女性/その他">
+                </div>
+                <div class="form-group">
+                    <label for="age">年齢</label>
+                    <input 
+                        type="number" 
+                        id="age" 
+                        name="age" 
+                        class="input"
+                        placeholder="20-60">
+                </div>
+            </div>
+        </div>
+        <!-- 能力値 -->
+        <div class="panel">
+            <h2><i class="fas fa-bolt"></i> 能力値</h2>
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <label for="str">STR (筋力)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="str" 
+                            name="str" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="str" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="str-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="con">CON (体力)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="con" 
+                            name="con" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="con" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="con-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="siz">SIZ (体格)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="siz" 
+                            name="siz" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="siz" data-dice="2d6+6" title="2D6+6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="siz-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="dex">DEX (敏捷性)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="dex" 
+                            name="dex" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="dex" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="dex-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="app">APP (外見)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="app" 
+                            name="app" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="app" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="app-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="int">INT (知性)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="int" 
+                            name="int" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="int" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="int-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="pow">POW (精神力)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="pow" 
+                            name="pow" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="pow" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="pow-percent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <label for="edu">EDU (教育)</label>
+                    <div class="ability-control">
+                        <input 
+                            type="number" 
+                            id="edu" 
+                            name="edu" 
+                            class="input" 
+                            value="0">
+                        <button class="roll-btn" data-stat="edu" data-dice="3d6+3" title="3D6+3でロール"><i class="fas fa-dice"></i></button>
+                    </div>
+                    <span class="stat-percent" id="edu-percent">0%</span>
+                </div>
+            </div>
+            <!-- 派生能力値 -->
+            <div class="derived-stats">
+                <div class="derived-stat">
+                    <label for="san">SAN (正気度)</label>
+                    <div class="with-unit">
+                        <input 
+                            type="number" 
+                            id="san" 
+                            name="san" 
+                            class="input" 
+                            value="0" 
+                            readonly>
+                        <span class="unit">点</span>
+                    </div>
+                </div>
+                <div class="derived-stat">
+                    <label for="hp">耐久力</label>
+                    <div class="with-unit">
+                        <input 
+                            type="number" 
+                            id="hp" 
+                            name="hp" 
+                            class="input" 
+                            value="0" 
+                            readonly>
+                        <span class="unit">点</span>
+                    </div>
+                </div>
+                <div class="derived-stat">
+                    <label for="mp">MP (マジック)</label>
+                    <div class="with-unit">
+                        <input 
+                            type="number" 
+                            id="mp" 
+                            name="mp" 
+                            class="input" 
+                            value="0" 
+                            readonly>
+                        <span class="unit">点</span>
+                    </div>
+                </div>
+                <div class="derived-stat">
+                    <label for="idea">アイデア</label>
+                    <div class="with-unit">
+                        <input 
+                            type="number" 
+                            id="idea" 
+                            name="idea" 
+                            class="input" 
+                            value="0" 
+                            readonly>
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+                <div class="derived-stat">
+                    <label for="luck">幸運</label>
+                    <div class="with-unit">
+                        <input 
+                            type="number" 
+                            id="luck" 
+                            name="luck" 
+                            class="input" 
+                            value="0" 
+                            readonly>
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+                <div class="derived-stat">
+                    <label for="knowledge">知識</label>
+                    <div class="with-unit">
+                        <input 
+                            type="number" 
+                            id="knowledge" 
+                            name="knowledge" 
+                            class="input" 
+                            value="0" 
+                            readonly>
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+                <div class="derived-stat">
+                    <label for="db">ダメージボーナス</label>
+                    <input 
+                        type="text" 
+                        id="db" 
+                        name="db" 
+                        class="input" 
+                        value="0" 
+                        readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

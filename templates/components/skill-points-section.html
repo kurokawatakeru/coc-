@@ -1,0 +1,37 @@
+<!-- 技能ポイント計算セクション -->
+<div class="skill-points-section">
+    <table class="skill-points-table">
+        <thead>
+            <tr>
+                <th width="20%">種類</th>
+                <th width="25%">計算方法</th>
+                <th width="25%">現在値</th>
+                <th width="30%">補正</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>職業P</td>
+                <td>
+                    <select id="occupationPointsCalc" class="input">
+                        <option value="edu*20">EDU×20</option>
+                        <option value="edu*15">EDU×15</option>
+                        <option value="edu*10">EDU×10</option>
+                    </select>
+                </td>
+                <td id="occupationPointsTotal">0/0</td>
+                <td>
+                    <input type="number" id="occupationPointsBonus" class="input" value="0" min="0">
+                </td>
+            </tr>
+            <tr>
+                <td>興味P</td>
+                <td>INT×10</td>
+                <td id="interestPointsTotal">0/0</td>
+                <td>
+                    <input type="number" id="interestPointsBonus" class="input" value="0" min="0">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

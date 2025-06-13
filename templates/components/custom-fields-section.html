@@ -1,0 +1,74 @@
+                    <!-- カスタム情報入力セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="customFieldsHeader">
+                            <span><i class="fas fa-edit"></i> PDFシート用カスタム情報</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="customFieldsContent">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="art1Name">芸術1の名称</label>
+                                    <input type="text" id="art1Name" class="input" placeholder="例：絵画">
+                                </div>
+                                <div class="form-group">
+                                    <label for="art1">芸術1値</label>
+                                    <input type="number" id="art1" class="input" value="5" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="art2Name">芸術2の名称</label>
+                                    <input type="text" id="art2Name" class="input" placeholder="例：写真">
+                                </div>
+                                <div class="form-group">
+                                    <label for="art2">芸術2値</label>
+                                    <input type="number" id="art2" class="input" value="5" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="craft1Name">制作1の名称</label>
+                                    <input type="text" id="craft1Name" class="input" placeholder="例：料理">
+                                </div>
+                                <div class="form-group">
+                                    <label for="craft1">制作1値</label>
+                                    <input type="number" id="craft1" class="input" value="5" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill1Name">追加技能1の名称</label>
+                                    <input type="text" id="customSkill1Name" class="input" placeholder="独自の技能">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill1">追加技能1値</label>
+                                    <input type="number" id="customSkill1" class="input" value="1" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill2Name">追加技能2の名称</label>
+                                    <input type="text" id="customSkill2Name" class="input" placeholder="独自の技能">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill2">追加技能2値</label>
+                                    <input type="number" id="customSkill2" class="input" value="1" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customFirearmName">追加火器の名称</label>
+                                    <input type="text" id="customFirearmName" class="input" placeholder="例：ハンドキャノン">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customFirearm">追加火器値</label>
+                                    <input type="number" id="customFirearm" class="input" value="1" min="0">
+                                </div>
+                                <!-- PDFシート用カスタム情報セクションの中に追加 -->
+                                <div class="form-group">
+                                    <label for="characterImage">キャラクター画像</label>
+                                    <div class="image-upload-container">
+                                        <input type="file" id="characterImage" accept="image/*" class="image-input">
+                                        <div id="characterImagePreview" class="image-preview">
+                                            <span class="image-placeholder">画像をドロップまたはクリックして選択</span>
+                                        </div>
+                                        <button id="removeImageBtn" class="btn danger image-remove-btn" style="display: none;"><i class="fas fa-trash"></i> 画像を削除
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- スキル追加ボタン -->
+                    <button id="addSkillBtn" class="btn accent"><i class="fas fa-plus"></i> 技能追加</button>

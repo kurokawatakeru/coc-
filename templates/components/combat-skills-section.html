@@ -1,0 +1,105 @@
+<!-- 戦闘技能セクション -->
+<div class="skill-category">
+    <div class="skill-category-header" id="combatSkillsHeader">
+        <span><i class="fas fa-fist-raised"></i> 戦闘技能</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="skill-category-content" id="combatSkillsContent">
+        <table class="skill-table">
+            <thead>
+                <tr>
+                    <th width="5%">成長</th>
+                    <th width="20%">技能名</th>
+                    <th width="10%">初期値</th>
+                    <th width="15%">職業P</th>
+                    <th width="15%">興味P</th>
+                    <th width="15%">成長分</th>
+                    <th width="10%">その他</th>
+                    <th width="10%">合計</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="dodge"></td>
+                    <td>回避</td>
+                    <td id="dodge-base">0</td>
+                    <td><input type="number" id="dodge-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="dodge-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="dodge-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="dodge-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="dodge-total">0</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="kick"></td>
+                    <td>キック</td>
+                    <td id="kick-base">25</td>
+                    <td><input type="number" id="kick-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="kick-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="kick-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="kick-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="kick-total">25</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="grapple"></td>
+                    <td>組み付き</td>
+                    <td id="grapple-base">25</td>
+                    <td><input type="number" id="grapple-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="grapple-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="grapple-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="grapple-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="grapple-total">25</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="punch"></td>
+                    <td>こぶし（パンチ）</td>
+                    <td id="punch-base">50</td>
+                    <td><input type="number" id="punch-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="punch-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="punch-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="punch-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="punch-total">50</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="headbutt"></td>
+                    <td>頭突き</td>
+                    <td id="headbutt-base">10</td>
+                    <td><input type="number" id="headbutt-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="headbutt-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="headbutt-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="headbutt-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="headbutt-total">10</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="throw"></td>
+                    <td>投擲</td>
+                    <td id="throw-base">25</td>
+                    <td><input type="number" id="throw-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="throw-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="throw-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="throw-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="throw-total">25</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="martialArts"></td>
+                    <td>マーシャルアーツ</td>
+                    <td id="martialArts-base">1</td>
+                    <td><input type="number" id="martialArts-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="martialArts-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="martialArts-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="martialArts-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="martialArts-total">1</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="growth-check" data-skill="iaijutsu"></td>
+                    <td>居合</td>
+                    <td id="iaijutsu-base">1</td>
+                    <td><input type="number" id="iaijutsu-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                    <td><input type="number" id="iaijutsu-int" class="input skill-points interest-points" value="0" min="0"></td>
+                    <td><input type="number" id="iaijutsu-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                    <td><input type="number" id="iaijutsu-other" class="input skill-points other-points" value="0" min="0"></td>
+                    <td class="total-cell" id="iaijutsu-total">1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+/* テーブルスタイル */
+
+/* 技能テーブル */
+.skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.skill-table th,
+.skill-table td {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.skill-table th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.skill-table tbody tr:nth-child(even) {
+    background-color: var(--table-row-alt-bg);
+}
+
+.skill-table tbody tr:nth-child(odd) {
+    background-color: var(--table-row-bg);
+}
+
+.skill-table tbody tr:hover {
+    background-color: rgba(142, 68, 173, 0.1);
+}
+
+.skill-table .total-cell {
+    font-weight: bold;
+    background-color: rgba(142, 68, 173, 0.1) !important;
+}
+
+/* 技能ポイントテーブル */
+.skill-points-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.skill-points-table th,
+.skill-points-table td {
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.skill-points-table th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.skill-points-section {
+    margin-bottom: 2rem;
+}
+
+/* プレビューテーブル */
+.character-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.character-preview th,
+.character-preview td {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.character-preview th {
+    background-color: var(--table-header-bg);
+    font-weight: 600;
+    width: 30%;
+}
+
+.character-preview td {
+    background-color: var(--table-row-bg);
+}
+
+/* 技能カテゴリ */
+.skill-category {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.skill-category-header {
+    background-color: var(--table-header-bg);
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.skill-category-header:hover {
+    background-color: rgba(142, 68, 173, 0.1);
+}
+
+.skill-category-header i {
+    transition: transform 0.3s ease;
+}
+
+.skill-category-content {
+    padding: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+/* 入力フィールド（テーブル内） */
+.skill-table input[type="number"],
+.skill-table input[type="text"] {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    padding: 0.25rem;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 3px;
+    font-size: 0.85rem;
+}
+
+.skill-table input[type="number"]:focus,
+.skill-table input[type="text"]:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.2);
+}
+
+/* 成長チェックボックス */
+.growth-check {
+    transform: scale(1.2);
+    accent-color: var(--success-color);
+}

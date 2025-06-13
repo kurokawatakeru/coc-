@@ -1,0 +1,255 @@
+/* レイアウトスタイル */
+
+/* タブ */
+.tabs {
+    display: flex;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tab-btn:hover {
+    background-color: var(--accent-color);
+}
+
+.tab-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.tab-btn i {
+    font-size: 1rem;
+}
+
+/* キャラクターシート */
+.character-sheet {
+    background-color: var(--panel-bg);
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.tab-content {
+    display: none;
+    padding: 1.5rem;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* パネル */
+.panel {
+    background-color: var(--panel-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.panel h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.panel h2 i {
+    color: var(--accent-color);
+}
+
+/* グリッドレイアウト */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* 能力値グリッド */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-item label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.ability-control {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.stat-percent {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-align: center;
+}
+
+/* 派生能力値 */
+.derived-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.derived-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.derived-stat label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.with-unit {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.unit {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* プレビューレイアウト */
+.character-preview {
+    background-color: var(--panel-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.sheet-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.sheet-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.sheet-header .subtitle {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.character-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.info-item {
+    padding: 0.25rem;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* 技能プレビュー */
+.skills-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.skills-column h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.skill-preview-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(142, 68, 173, 0.1);
+}
+
+.skill-name {
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.skill-value {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}

@@ -1,0 +1,345 @@
+                    <!-- 知識技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="knowledgeSkillsHeader">
+                            <span><i class="fas fa-book"></i> 知識技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="knowledgeSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="firstAid"></td>
+                                        <td>応急手当</td>
+                                        <td id="firstAid-base">30</td>
+                                        <td><input type="number" id="firstAid-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="firstAid-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="firstAid-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="firstAid-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="firstAid-total">30</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="medicine"></td>
+                                        <td>医学</td>
+                                        <td id="medicine-base">5</td>
+                                        <td><input type="number" id="medicine-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="medicine-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="medicine-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="medicine-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="medicine-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="psychology"></td>
+                                        <td>心理学</td>
+                                        <td id="psychology-base">5</td>
+                                        <td><input type="number" id="psychology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="psychology-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="occult"></td>
+                                        <td>オカルト</td>
+                                        <td id="occult-base">5</td>
+                                        <td><input type="number" id="occult-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="occult-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="occult-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="occult-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="occult-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="history"></td>
+                                        <td>歴史</td>
+                                        <td id="history-base">20</td>
+                                        <td><input type="number" id="history-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="history-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="history-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="history-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="history-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="cthulhuMythos"></td>
+                                        <td>クトゥルフ神話</td>
+                                        <td id="cthulhuMythos-base">0</td>
+                                        <td><input type="number" id="cthulhuMythos-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="cthulhuMythos-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="cthulhuMythos-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="cthulhuMythos-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="cthulhuMythos-total">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="accounting"></td>
+                                        <td>経理</td>
+                                        <td id="accounting-base">10</td>
+                                        <td><input type="number" id="accounting-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="accounting-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="accounting-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="accounting-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="accounting-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="anthropology"></td>
+                                        <td>人類学</td>
+                                        <td id="anthropology-base">1</td>
+                                        <td><input type="number" id="anthropology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="anthropology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="anthropology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="anthropology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="anthropology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="archaeology"></td>
+                                        <td>考古学</td>
+                                        <td id="archaeology-base">1</td>
+                                        <td><input type="number" id="archaeology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="archaeology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="archaeology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="archaeology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="archaeology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="biology"></td>
+                                        <td>生物学</td>
+                                        <td id="biology-base">1</td>
+                                        <td><input type="number" id="biology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="biology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="biology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="biology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="biology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="chemistry"></td>
+                                        <td>化学</td>
+                                        <td id="chemistry-base">1</td>
+                                        <td><input type="number" id="chemistry-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="chemistry-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="chemistry-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="chemistry-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="chemistry-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="computer"></td>
+                                        <td>コンピューター</td>
+                                        <td id="computer-base">1</td>
+                                        <td><input type="number" id="computer-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="computer-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="computer-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="computer-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="computer-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="electronics"></td>
+                                        <td>電子工学</td>
+                                        <td id="electronics-base">1</td>
+                                        <td><input type="number" id="electronics-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electronics-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electronics-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electronics-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="electronics-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="geology"></td>
+                                        <td>地質学</td>
+                                        <td id="geology-base">1</td>
+                                        <td><input type="number" id="geology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="geology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="geology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="geology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="geology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="law"></td>
+                                        <td>法律</td>
+                                        <td id="law-base">5</td>
+                                        <td><input type="number" id="law-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="law-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="law-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="law-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="law-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="navigate"></td>
+                                        <td>ナビゲート</td>
+                                        <td id="navigate-base">10</td>
+                                        <td><input type="number" id="navigate-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="navigate-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="navigate-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="navigate-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="navigate-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="physics"></td>
+                                        <td>物理学</td>
+                                        <td id="physics-base">1</td>
+                                        <td><input type="number" id="physics-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="physics-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="physics-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="physics-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="physics-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="astronomy"></td>
+                                        <td>天文学</td>
+                                        <td id="astronomy-base">1</td>
+                                        <td><input type="number" id="astronomy-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="astronomy-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="astronomy-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="astronomy-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="astronomy-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="naturalHistory"></td>
+                                        <td>博物学</td>
+                                        <td id="naturalHistory-base">10</td>
+                                        <td><input type="number" id="naturalHistory-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="naturalHistory-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="naturalHistory-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="naturalHistory-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="naturalHistory-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="photography"></td>
+                                        <td>写真術</td>
+                                        <td id="photography-base">10</td>
+                                        <td><input type="number" id="photography-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="photography-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="photography-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="photography-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="photography-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="psychoanalysis"></td>
+                                        <td>精神分析</td>
+                                        <td id="psychoanalysis-base">1</td>
+                                        <td><input type="number" id="psychoanalysis-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychoanalysis-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychoanalysis-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychoanalysis-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="psychoanalysis-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="pharmacy"></td>
+                                        <td>薬学</td>
+                                        <td id="pharmacy-base">1</td>
+                                        <td><input type="number" id="pharmacy-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pharmacy-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pharmacy-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pharmacy-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="pharmacy-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="survival"></td>
+                                        <td>サバイバル</td>
+                                        <td id="survival-base">10</td>
+                                        <td><input type="number" id="survival-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="survival-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="survival-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="survival-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="survival-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="ownLanguage"></td>
+                                        <td>母国語</td>
+                                        <td id="ownLanguage-base">0</td>
+                                        <td><input type="number" id="ownLanguage-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ownLanguage-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ownLanguage-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ownLanguage-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="ownLanguage-total">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="otherLanguage1"></td>
+                                        <td>他の言語1</td>
+                                        <td id="otherLanguage1-base">1</td>
+                                        <td><input type="number" id="otherLanguage1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="otherLanguage1-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="otherLanguage2"></td>
+                                        <td>他の言語2</td>
+                                        <td id="otherLanguage2-base">1</td>
+                                        <td><input type="number" id="otherLanguage2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="otherLanguage2-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="art1"></td>
+                                        <td>芸術1</td>
+                                        <td id="art1-base">5</td>
+                                        <td><input type="number" id="art1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="art1-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="art2"></td>
+                                        <td>芸術2</td>
+                                        <td id="art2-base">5</td>
+                                        <td><input type="number" id="art2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="art2-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="craft1"></td>
+                                        <td>制作1</td>
+                                        <td id="craft1-base">5</td>
+                                        <td><input type="number" id="craft1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="craft1-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="craft2"></td>
+                                        <td>制作2</td>
+                                        <td id="craft2-base">5</td>
+                                        <td><input type="number" id="craft2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="craft2-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="customSkill1"></td>
+                                        <td>追加技能1</td>
+                                        <td id="customSkill1-base">1</td>
+                                        <td><input type="number" id="customSkill1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="customSkill1-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="customSkill2"></td>
+                                        <td>追加技能2</td>
+                                        <td id="customSkill2-base">1</td>
+                                        <td><input type="number" id="customSkill2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="customSkill2-total">1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>

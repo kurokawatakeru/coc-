@@ -77,17 +77,50 @@
 
 ```
 .
-├── index.html         # アプリケーションのメインHTMLファイル
-├── styles.css         # スタイルシート
-├── script.js          # JavaScriptロジック
-└── character-sheet.png # (推奨) PDF生成時に使用されるキャラクターシート背景画像
+├── index.html                   # メインHTMLファイル（コンポーネント読み込み版）
+├── character-sheet.png          # PDF生成用背景画像
+├── css/
+│   ├── app.css                  # メインCSSファイル
+│   └── modules/
+│       └── base.css             # ベーススタイル
+├── js/
+│   ├── app.js                   # メインJavaScriptファイル
+│   └── modules/
+│       ├── constants.js         # 定数・データ定義
+│       ├── utils.js            # ユーティリティ関数
+│       ├── app.js              # アプリケーション状態管理
+│       ├── initialization.js   # 初期化処理
+│       ├── character-stats.js  # 能力値・ダイス機能
+│       ├── skill-points.js     # 技能ポイント計算
+│       ├── data-management.js  # データ保存・読み込み
+│       ├── export-import.js    # エクスポート・インポート
+│       ├── pdf-generation.js   # PDF生成・印刷
+│       ├── occupation-templates.js # 職業テンプレート
+│       ├── custom-skills.js    # カスタム技能追加
+│       ├── preview.js          # プレビュー表示
+│       └── template-loader.js  # HTMLテンプレート読み込み
+├── templates/
+│   └── components/
+│       ├── header.html         # ヘッダーコンポーネント
+│       ├── tabs.html           # タブナビゲーション
+│       ├── basic-info-tab.html # 基本情報タブ
+│       ├── footer.html         # フッター
+│       └── pdf-container.html  # PDF生成用コンテナ
+└── (旧ファイル)
+    ├── index-original.html     # 旧HTMLファイル（元の1677行版）
+    ├── styles.css              # 旧スタイルシート（参考用）
+    └── script.js               # 旧JavaScriptファイル（参考用）
 ```
 
 ## セットアップと使用方法
 
-1.  上記ファイル（`index.html`, `styles.css`, `script.js`）を同じディレクトリに配置します。
-2.  PDF生成機能を利用する場合は、`character-sheet.png`（またはスクリプト内で指定された画像ファイル名のもの）も同じディレクトリに配置してください。
+1.  プロジェクトファイル一式をダウンロードまたはクローンします。
+2.  PDF生成機能を利用する場合は、`character-sheet.png`がルートディレクトリに配置されていることを確認してください。
 3.  ウェブブラウザで `index.html` を開くと、キャラクター作成ツールが起動します。
+4.  **注意**: ES6モジュールを使用しているため、ローカル環境でテストする際はHTTPサーバー経由で起動する必要があります。
+   - Python: `python -m http.server 8000`
+   - Node.js: `npx http-server`
+   - PHP: `php -S localhost:8000`
 
 ### 基本的な使い方
 1.  **基本情報タブ**: 探索者の名前や職業などの基本情報を入力します。

@@ -1,0 +1,135 @@
+                    <!-- 行動技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="actionSkillsHeader">
+                            <span><i class="fas fa-running"></i> 行動技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="actionSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="climb"></td>
+                                        <td>登攀</td>
+                                        <td id="climb-base">40</td>
+                                        <td><input type="number" id="climb-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="climb-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="climb-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="climb-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="climb-total">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="jump"></td>
+                                        <td>跳躍</td>
+                                        <td id="jump-base">25</td>
+                                        <td><input type="number" id="jump-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="jump-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="jump-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="jump-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="jump-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="swim"></td>
+                                        <td>水泳</td>
+                                        <td id="swim-base">25</td>
+                                        <td><input type="number" id="swim-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="swim-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="swim-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="swim-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="swim-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="drive"></td>
+                                        <td>運転(自動車)</td>
+                                        <td id="drive-base">20</td>
+                                        <td><input type="number" id="drive-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="drive-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="drive-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="drive-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="drive-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="driveOther"></td>
+                                        <td>運転(その他)</td>
+                                        <td id="driveOther-base">20</td>
+                                        <td><input type="number" id="driveOther-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="driveOther-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="driveOther-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="driveOther-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="driveOther-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="pilot1"></td>
+                                        <td>操縦1</td>
+                                        <td id="pilot1-base">1</td>
+                                        <td><input type="number" id="pilot1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="pilot1-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="pilot2"></td>
+                                        <td>操縦2</td>
+                                        <td id="pilot2-base">1</td>
+                                        <td><input type="number" id="pilot2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="pilot2-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="ride"></td>
+                                        <td>乗馬</td>
+                                        <td id="ride-base">5</td>
+                                        <td><input type="number" id="ride-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ride-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ride-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ride-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="ride-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="operateHeavyMachinery"></td>
+                                        <td>重機械操作</td>
+                                        <td id="operateHeavyMachinery-base">1</td>
+                                        <td><input type="number" id="operateHeavyMachinery-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="operateHeavyMachinery-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="operateHeavyMachinery-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="operateHeavyMachinery-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="operateHeavyMachinery-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="mechanicalRepair"></td>
+                                        <td>機械修理</td>
+                                        <td id="mechanicalRepair-base">20</td>
+                                        <td><input type="number" id="mechanicalRepair-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mechanicalRepair-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mechanicalRepair-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mechanicalRepair-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="mechanicalRepair-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="electricalRepair"></td>
+                                        <td>電気修理</td>
+                                        <td id="electricalRepair-base">10</td>
+                                        <td><input type="number" id="electricalRepair-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electricalRepair-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electricalRepair-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electricalRepair-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="electricalRepair-total">10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>

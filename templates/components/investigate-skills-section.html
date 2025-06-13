@@ -1,0 +1,105 @@
+                    <!-- 探索技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="investigateSkillsHeader">
+                            <span><i class="fas fa-search"></i> 探索技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="investigateSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="listen"></td>
+                                        <td>聞き耳</td>
+                                        <td id="listen-base">25</td>
+                                        <td><input type="number" id="listen-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="listen-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="listen-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="listen-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="listen-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="spotHidden"></td>
+                                        <td>目星</td>
+                                        <td id="spotHidden-base">25</td>
+                                        <td><input type="number" id="spotHidden-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="spotHidden-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="spotHidden-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="spotHidden-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="spotHidden-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="libraryUse"></td>
+                                        <td>図書館</td>
+                                        <td id="libraryUse-base">25</td>
+                                        <td><input type="number" id="libraryUse-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="libraryUse-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="libraryUse-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="libraryUse-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="libraryUse-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="track"></td>
+                                        <td>追跡</td>
+                                        <td id="track-base">10</td>
+                                        <td><input type="number" id="track-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="track-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="track-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="track-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="track-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="locksmith"></td>
+                                        <td>鍵開け</td>
+                                        <td id="locksmith-base">1</td>
+                                        <td><input type="number" id="locksmith-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="locksmith-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="locksmith-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="locksmith-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="locksmith-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="conceal"></td>
+                                        <td>隠す</td>
+                                        <td id="conceal-base">15</td>
+                                        <td><input type="number" id="conceal-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="conceal-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="conceal-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="conceal-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="conceal-total">15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="hide"></td>
+                                        <td>隠れる</td>
+                                        <td id="hide-base">10</td>
+                                        <td><input type="number" id="hide-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="hide-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="hide-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="hide-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="hide-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="sneak"></td>
+                                        <td>忍び歩き</td>
+                                        <td id="sneak-base">10</td>
+                                        <td><input type="number" id="sneak-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="sneak-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="sneak-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="sneak-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="sneak-total">10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>

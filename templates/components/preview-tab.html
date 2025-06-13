@@ -1,0 +1,248 @@
+<div id="preview" class="tab-content">
+    <div class="panel preview-sheet">
+        <div class="sheet-header">
+            <div class="sheet-title">
+                <h2>クトゥルフ神話TRPG 探索者シート</h2>
+            </div>
+            <div class="sheet-info">
+                <div class="sheet-row">
+                    <div class="sheet-label">探索者名：</div>
+                    <div class="sheet-value" id="preview-name"></div>
+                </div>
+                <div class="sheet-row">
+                    <div class="sheet-label">職業：</div>
+                    <div class="sheet-value" id="preview-occupation"></div>
+                </div>
+                <div class="sheet-row">
+                    <div class="sheet-label">学校・学位：</div>
+                    <div class="sheet-value" id="preview-school"></div>
+                </div>
+                <div class="sheet-row">
+                    <div class="sheet-label">出身：</div>
+                    <div class="sheet-value" id="preview-origin"></div>
+                </div>
+                <div class="sheet-row-2">
+                    <div class="sheet-col">
+                        <div class="sheet-label">性別：</div>
+                        <div class="sheet-value" id="preview-gender"></div>
+                    </div>
+                    <div class="sheet-col">
+                        <div class="sheet-label">年齢：</div>
+                        <div class="sheet-value" id="preview-age"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sheet-stats">
+            <h3>能力値</h3>
+            <div class="stat-table">
+                <div class="stat-row">
+                    <div class="stat-cell">STR：<span id="preview-str"></span></div>
+                    <div class="stat-cell">DEX：<span id="preview-dex"></span></div>
+                    <div class="stat-cell">INT：<span id="preview-int"></span></div>
+                    <div class="stat-cell">アイデア：<span id="preview-idea"></span></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-cell">CON：<span id="preview-con"></span></div>
+                    <div class="stat-cell">APP：<span id="preview-app"></span></div>
+                    <div class="stat-cell">POW：<span id="preview-pow"></span></div>
+                    <div class="stat-cell">幸運：<span id="preview-luck"></span></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-cell">SIZ：<span id="preview-siz"></span></div>
+                    <div class="stat-cell">SAN：<span id="preview-san"></span></div>
+                    <div class="stat-cell">EDU：<span id="preview-edu"></span></div>
+                    <div class="stat-cell">知識：<span id="preview-knowledge"></span></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-cell">ダメージボーナス：<span id="preview-db"></span></div>
+                    <div class="stat-cell">耐久力：<span id="preview-hp"></span></div>
+                    <div class="stat-cell">MP：<span id="preview-mp"></span></div>
+                    <div class="stat-cell"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sheet-skills-preview">
+            <h3>技能</h3>
+            <div class="skills-grid">
+                <div class="skills-column">
+                    <h4>探索技能</h4>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">聞き耳：</div>
+                        <div class="skill-value" id="preview-listen"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">目星：</div>
+                        <div class="skill-value" id="preview-spotHidden"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">図書館：</div>
+                        <div class="skill-value" id="preview-libraryUse"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">追跡：</div>
+                        <div class="skill-value" id="preview-track"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">鍵開け：</div>
+                        <div class="skill-value" id="preview-locksmith"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">隠す：</div>
+                        <div class="skill-value" id="preview-conceal"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">隠れる：</div>
+                        <div class="skill-value" id="preview-hide"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">忍び歩き：</div>
+                        <div class="skill-value" id="preview-sneak"></div>
+                    </div>
+                </div>
+                
+                <div class="skills-column">
+                    <h4>知識技能</h4>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">応急手当：</div>
+                        <div class="skill-value" id="preview-firstAid"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">医学：</div>
+                        <div class="skill-value" id="preview-medicine"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">クトゥルフ神話：</div>
+                        <div class="skill-value" id="preview-cthulhuMythos"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">歴史：</div>
+                        <div class="skill-value" id="preview-history"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">心理学：</div>
+                        <div class="skill-value" id="preview-psychology"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">オカルト：</div>
+                        <div class="skill-value" id="preview-occult"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">母国語：</div>
+                        <div class="skill-value" id="preview-ownLanguage"></div>
+                    </div>
+                </div>
+
+                <div class="skills-column">
+                    <h4>行動技能</h4>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">登攀：</div>
+                        <div class="skill-value" id="preview-climb"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">跳躍：</div>
+                        <div class="skill-value" id="preview-jump"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">水泳：</div>
+                        <div class="skill-value" id="preview-swim"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">運転：</div>
+                        <div class="skill-value" id="preview-drive"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">運転(その他)：</div>
+                        <div class="skill-value" id="preview-driveOther"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">操縦1：</div>
+                        <div class="skill-value" id="preview-pilot1"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">操縦2：</div>
+                        <div class="skill-value" id="preview-pilot2"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">乗馬：</div>
+                        <div class="skill-value" id="preview-ride"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">重機械操作：</div>
+                        <div class="skill-value" id="preview-operateHeavyMachinery"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">機械修理：</div>
+                        <div class="skill-value" id="preview-mechanicalRepair"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">電気修理：</div>
+                        <div class="skill-value" id="preview-electricalRepair"></div>
+                    </div>
+                </div>
+
+                <div class="skills-column">
+                    <h4>交渉技能</h4>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">言いくるめ：</div>
+                        <div class="skill-value" id="preview-fastTalk"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">説得：</div>
+                        <div class="skill-value" id="preview-persuade"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">値切り：</div>
+                        <div class="skill-value" id="preview-bargain"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">信用：</div>
+                        <div class="skill-value" id="preview-creditRating"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">変装：</div>
+                        <div class="skill-value" id="preview-disguise"></div>
+                    </div>
+                </div>
+
+                <div class="skills-column">
+                    <h4>戦闘技能</h4>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">回避：</div>
+                        <div class="skill-value" id="preview-dodge"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">こぶし：</div>
+                        <div class="skill-value" id="preview-punch"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">キック：</div>
+                        <div class="skill-value" id="preview-kick"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">組み付き：</div>
+                        <div class="skill-value" id="preview-grapple"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">頭突き：</div>
+                        <div class="skill-value" id="preview-headbutt"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">投擲：</div>
+                        <div class="skill-value" id="preview-throw"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">拳銃：</div>
+                        <div class="skill-value" id="preview-handgun"></div>
+                    </div>
+                    <div class="skill-preview-item">
+                        <div class="skill-name">ライフル：</div>
+                        <div class="skill-value" id="preview-rifle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

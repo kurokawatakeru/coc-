@@ -1,0 +1,63 @@
+/* ベーススタイル - 変数、リセット、基本設定 */
+
+/* CSS変数の定義 */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #8e44ad;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --border-color: #bdc3c7;
+    --text-color: #222;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --panel-bg: #fff;
+    --table-header-bg: #f8f9fa;
+    --table-row-bg: #fff;
+    --table-row-alt-bg: #f8f9fa;
+    --input-bg: #fff;
+}
+
+/* ダークモード用変数 */
+[data-theme="dark"] {
+    --primary-color: #1a1f36;
+    --secondary-color: #2a2f45;
+    --accent-color: #9b59b6;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --light-color: #34495e;
+    --dark-color: #1a1f36;
+    --border-color: #3d4654;
+    --text-color: #ecf0f1;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    --panel-bg: #2a2f45;
+    --table-header-bg: #3d4654;
+    --table-row-bg: #2a2f45;
+    --table-row-alt-bg: #34495e;
+    --input-bg: #34495e;
+}
+
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 基本スタイル */
+body {
+    font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}

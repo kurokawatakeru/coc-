@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6版CoCTRPG キャラクター作成ツール</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>6版CoCTRPG キャラクター作成ツール</h1>
+            
+            <!-- ダークモードトグル -->
+            <div class="theme-switch-container">
+                <span>ライトモード</span>
+                <label class="theme-switch">
+                    <input type="checkbox" id="themeSwitch">
+                    <span class="slider">
+                        <i class="fas fa-sun slider-icon slider-icon-sun"></i>
+                        <i class="fas fa-moon slider-icon slider-icon-moon"></i>
+                    </span>
+                </label>
+                <span>ダークモード</span>
+            </div>
+            
+            <div class="controls">
+                <button id="randomBtn" class="btn primary"><i class="fas fa-dice"></i> ランダム生成</button>
+                <select id="occupationTemplate" class="select">
+                    <option value="default">職業テンプレート...</option>
+                    <option value="detective">探偵</option>
+                    <option value="doctor">医者</option>
+                    <option value="journalist">ジャーナリスト</option>
+                    <option value="professor">大学教授</option>
+                    <option value="policeman">警察官</option>
+                </select>
+                <button id="saveBtn" class="btn secondary"><i class="fas fa-save"></i> 保存</button>
+                <select id="loadSelect" class="select">
+                    <option value="">保存データ読込...</option>
+                </select>
+                <button id="exportBtn" class="btn info"><i class="fas fa-file-export"></i> エクスポート</button>
+                <button id="importBtn" class="btn info"><i class="fas fa-file-import"></i> インポート</button>
+                <input type="file" id="importFile" accept=".json,.txt" style="display: none;">
+                <button id="printBtn" class="btn accent"><i class="fas fa-print"></i> 印刷</button>
+                <button id="generatePdfBtn" class="btn danger"><i class="fas fa-file-pdf"></i> PDF生成</button>
+            </div>
+        </header>
+
+        <!-- タブナビゲーション -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="basic"><i class="fas fa-user-alt"></i> 基本情報</button>
+            <button class="tab-btn" data-tab="skills"><i class="fas fa-brain"></i> 技能</button>
+            <button class="tab-btn" data-tab="combat"><i class="fas fa-fist-raised"></i> 戦闘</button>
+            <button class="tab-btn" data-tab="preview"><i class="fas fa-eye"></i> プレビュー</button>
+        </div>
+
+        <!-- キャラクターシート -->
+        <div class="character-sheet">
+            <!-- 基本情報タブ -->
+            <div id="basic" class="tab-content active">
+                <div class="grid-2">
+                    <!-- 個人情報 -->
+                    <div class="panel">
+                        <h2><i class="fas fa-user"></i> 探索者情報</h2>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="name">探索者名</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    class="input"
+                                    placeholder="名前を入力">
+                            </div>
+                            <div class="form-group">
+                                <label for="occupation">職業</label>
+                                <input 
+                                    type="text" 
+                                    id="occupation" 
+                                    name="occupation" 
+                                    class="input"
+                                    placeholder="探偵、医者など">
+                            </div>
+                            <div class="form-group">
+                                <label for="school">学校・学位</label>
+                                <input 
+                                    type="text" 
+                                    id="school" 
+                                    name="school" 
+                                    class="input"
+                                    placeholder="ミスカトニック大学など">
+                            </div>
+                            <div class="form-group">
+                                <label for="origin">出身</label>
+                                <input 
+                                    type="text" 
+                                    id="origin" 
+                                    name="origin" 
+                                    class="input"
+                                    placeholder="アーカム市など">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">性別</label>
+                                <input 
+                                    type="text" 
+                                    id="gender" 
+                                    name="gender" 
+                                    class="input"
+                                    placeholder="男性/女性/その他">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">年齢</label>
+                                <input 
+                                    type="number" 
+                                    id="age" 
+                                    name="age" 
+                                    class="input"
+                                    placeholder="20-60">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 能力値 -->
+                    <div class="panel">
+                        <h2><i class="fas fa-bolt"></i> 能力値</h2>
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <label for="str">STR (筋力)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="str" 
+                                        name="str" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="str" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="str-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="con">CON (体力)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="con" 
+                                        name="con" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="con" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="con-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="siz">SIZ (体格)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="siz" 
+                                        name="siz" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="siz" data-dice="2d6+6" title="2D6+6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="siz-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="dex">DEX (敏捷性)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="dex" 
+                                        name="dex" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="dex" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="dex-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="app">APP (外見)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="app" 
+                                        name="app" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="app" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="app-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="int">INT (知性)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="int" 
+                                        name="int" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="int" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="int-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="pow">POW (精神力)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="pow" 
+                                        name="pow" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="pow" data-dice="3d6" title="3D6でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="pow-percent">0%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label for="edu">EDU (教育)</label>
+                                <div class="ability-control">
+                                    <input 
+                                        type="number" 
+                                        id="edu" 
+                                        name="edu" 
+                                        class="input" 
+                                        value="0">
+                                    <button class="roll-btn" data-stat="edu" data-dice="3d6+3" title="3D6+3でロール"><i class="fas fa-dice"></i></button>
+                                </div>
+                                <span class="stat-percent" id="edu-percent">0%</span>
+                            </div>
+                        </div>
+                        <!-- 派生能力値 -->
+                        <div class="derived-stats">
+                            <div class="derived-stat">
+                                <label for="san">SAN (正気度)</label>
+                                <div class="with-unit">
+                                    <input 
+                                        type="number" 
+                                        id="san" 
+                                        name="san" 
+                                        class="input" 
+                                        value="0" 
+                                        readonly>
+                                    <span class="unit">点</span>
+                                </div>
+                            </div>
+                            <div class="derived-stat">
+                                <label for="hp">耐久力</label>
+                                <div class="with-unit">
+                                    <input 
+                                        type="number" 
+                                        id="hp" 
+                                        name="hp" 
+                                        class="input" 
+                                        value="0" 
+                                        readonly>
+                                    <span class="unit">点</span>
+                                </div>
+                            </div>
+                            <div class="derived-stat">
+                                <label for="mp">MP (マジック)</label>
+                                <div class="with-unit">
+                                    <input 
+                                        type="number" 
+                                        id="mp" 
+                                        name="mp" 
+                                        class="input" 
+                                        value="0" 
+                                        readonly>
+                                    <span class="unit">点</span>
+                                </div>
+                            </div>
+                            <div class="derived-stat">
+                                <label for="idea">アイデア</label>
+                                <div class="with-unit">
+                                    <input 
+                                        type="number" 
+                                        id="idea" 
+                                        name="idea" 
+                                        class="input" 
+                                        value="0" 
+                                        readonly>
+                                    <span class="unit">%</span>
+                                </div>
+                            </div>
+                            <div class="derived-stat">
+                                <label for="luck">幸運</label>
+                                <div class="with-unit">
+                                    <input 
+                                        type="number" 
+                                        id="luck" 
+                                        name="luck" 
+                                        class="input" 
+                                        value="0" 
+                                        readonly>
+                                    <span class="unit">%</span>
+                                </div>
+                            </div>
+                            <div class="derived-stat">
+                                <label for="knowledge">知識</label>
+                                <div class="with-unit">
+                                    <input 
+                                        type="number" 
+                                        id="knowledge" 
+                                        name="knowledge" 
+                                        class="input" 
+                                        value="0" 
+                                        readonly>
+                                    <span class="unit">%</span>
+                                </div>
+                            </div>
+                            <div class="derived-stat">
+                                <label for="db">ダメージボーナス</label>
+                                <input 
+                                    type="text" 
+                                    id="db" 
+                                    name="db" 
+                                    class="input" 
+                                    value="0" 
+                                    readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 技能タブ -->
+            <div id="skills" class="tab-content">
+                <div class="panel">
+                    <h2><i class="fas fa-brain"></i> 技能</h2>
+                    
+                    <!-- 技能ポイント計算セクション -->
+                    <div class="skill-points-section">
+                        <table class="skill-points-table">
+                            <thead>
+                                <tr>
+                                    <th width="20%">種類</th>
+                                    <th width="25%">計算方法</th>
+                                    <th width="25%">現在値</th>
+                                    <th width="30%">補正</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>職業P</td>
+                                    <td>
+                                        <select id="occupationPointsCalc" class="input">
+                                            <option value="edu*20">EDU×20</option>
+                                            <option value="edu*15">EDU×15</option>
+                                            <option value="edu*10">EDU×10</option>
+                                        </select>
+                                    </td>
+                                    <td id="occupationPointsTotal">0/0</td>
+                                    <td>
+                                        <input type="number" id="occupationPointsBonus" class="input" value="0" min="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>興味P</td>
+                                    <td>INT×10</td>
+                                    <td id="interestPointsTotal">0/0</td>
+                                    <td>
+                                        <input type="number" id="interestPointsBonus" class="input" value="0" min="0">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 戦闘技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="combatSkillsHeader">
+                            <span><i class="fas fa-fist-raised"></i> 戦闘技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="combatSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="dodge"></td>
+                                        <td>回避</td>
+                                        <td id="dodge-base">0</td>
+                                        <td><input type="number" id="dodge-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="dodge-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="dodge-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="dodge-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="dodge-total">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="kick"></td>
+                                        <td>キック</td>
+                                        <td id="kick-base">25</td>
+                                        <td><input type="number" id="kick-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="kick-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="kick-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="kick-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="kick-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="grapple"></td>
+                                        <td>組み付き</td>
+                                        <td id="grapple-base">25</td>
+                                        <td><input type="number" id="grapple-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="grapple-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="grapple-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="grapple-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="grapple-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="punch"></td>
+                                        <td>こぶし（パンチ）</td>
+                                        <td id="punch-base">50</td>
+                                        <td><input type="number" id="punch-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="punch-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="punch-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="punch-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="punch-total">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="headbutt"></td>
+                                        <td>頭突き</td>
+                                        <td id="headbutt-base">10</td>
+                                        <td><input type="number" id="headbutt-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="headbutt-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="headbutt-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="headbutt-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="headbutt-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="throw"></td>
+                                        <td>投擲</td>
+                                        <td id="throw-base">25</td>
+                                        <td><input type="number" id="throw-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="throw-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="throw-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="throw-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="throw-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="martialArts"></td>
+                                        <td>マーシャルアーツ</td>
+                                        <td id="martialArts-base">1</td>
+                                        <td><input type="number" id="martialArts-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="martialArts-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="martialArts-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="martialArts-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="martialArts-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="iaijutsu"></td>
+                                        <td>居合</td>
+                                        <td id="iaijutsu-base">1</td>
+                                        <td><input type="number" id="iaijutsu-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="iaijutsu-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="iaijutsu-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="iaijutsu-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="iaijutsu-total">1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- 射撃技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="shootingSkillsHeader">
+                            <span><i class="fas fa-gun"></i> 射撃技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="shootingSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="handgun"></td>
+                                        <td>拳銃</td>
+                                        <td id="handgun-base">20</td>
+                                        <td><input type="number" id="handgun-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="handgun-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="handgun-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="handgun-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="handgun-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="smg"></td>
+                                        <td>サブマシンガン</td>
+                                        <td id="smg-base">15</td>
+                                        <td><input type="number" id="smg-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="smg-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="smg-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="smg-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="smg-total">15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="shotgun"></td>
+                                        <td>ショットガン</td>
+                                        <td id="shotgun-base">30</td>
+                                        <td><input type="number" id="shotgun-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="shotgun-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="shotgun-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="shotgun-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="shotgun-total">30</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="mg"></td>
+                                        <td>マシンガン</td>
+                                        <td id="mg-base">15</td>
+                                        <td><input type="number" id="mg-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mg-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mg-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mg-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="mg-total">15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="rifle"></td>
+                                        <td>ライフル</td>
+                                        <td id="rifle-base">25</td>
+                                        <td><input type="number" id="rifle-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="rifle-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="rifle-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="rifle-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="rifle-total">25</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- 探索技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="investigateSkillsHeader">
+                            <span><i class="fas fa-search"></i> 探索技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="investigateSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="listen"></td>
+                                        <td>聞き耳</td>
+                                        <td id="listen-base">25</td>
+                                        <td><input type="number" id="listen-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="listen-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="listen-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="listen-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="listen-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="spotHidden"></td>
+                                        <td>目星</td>
+                                        <td id="spotHidden-base">25</td>
+                                        <td><input type="number" id="spotHidden-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="spotHidden-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="spotHidden-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="spotHidden-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="spotHidden-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="libraryUse"></td>
+                                        <td>図書館</td>
+                                        <td id="libraryUse-base">25</td>
+                                        <td><input type="number" id="libraryUse-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="libraryUse-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="libraryUse-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="libraryUse-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="libraryUse-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="track"></td>
+                                        <td>追跡</td>
+                                        <td id="track-base">10</td>
+                                        <td><input type="number" id="track-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="track-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="track-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="track-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="track-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="locksmith"></td>
+                                        <td>鍵開け</td>
+                                        <td id="locksmith-base">1</td>
+                                        <td><input type="number" id="locksmith-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="locksmith-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="locksmith-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="locksmith-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="locksmith-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="conceal"></td>
+                                        <td>隠す</td>
+                                        <td id="conceal-base">15</td>
+                                        <td><input type="number" id="conceal-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="conceal-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="conceal-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="conceal-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="conceal-total">15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="hide"></td>
+                                        <td>隠れる</td>
+                                        <td id="hide-base">10</td>
+                                        <td><input type="number" id="hide-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="hide-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="hide-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="hide-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="hide-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="sneak"></td>
+                                        <td>忍び歩き</td>
+                                        <td id="sneak-base">10</td>
+                                        <td><input type="number" id="sneak-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="sneak-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="sneak-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="sneak-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="sneak-total">10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 知識技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="knowledgeSkillsHeader">
+                            <span><i class="fas fa-book"></i> 知識技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="knowledgeSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="firstAid"></td>
+                                        <td>応急手当</td>
+                                        <td id="firstAid-base">30</td>
+                                        <td><input type="number" id="firstAid-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="firstAid-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="firstAid-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="firstAid-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="firstAid-total">30</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="medicine"></td>
+                                        <td>医学</td>
+                                        <td id="medicine-base">5</td>
+                                        <td><input type="number" id="medicine-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="medicine-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="medicine-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="medicine-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="medicine-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="psychology"></td>
+                                        <td>心理学</td>
+                                        <td id="psychology-base">5</td>
+                                        <td><input type="number" id="psychology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="psychology-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="occult"></td>
+                                        <td>オカルト</td>
+                                        <td id="occult-base">5</td>
+                                        <td><input type="number" id="occult-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="occult-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="occult-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="occult-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="occult-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="history"></td>
+                                        <td>歴史</td>
+                                        <td id="history-base">20</td>
+                                        <td><input type="number" id="history-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="history-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="history-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="history-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="history-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="cthulhuMythos"></td>
+                                        <td>クトゥルフ神話</td>
+                                        <td id="cthulhuMythos-base">0</td>
+                                        <td><input type="number" id="cthulhuMythos-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="cthulhuMythos-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="cthulhuMythos-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="cthulhuMythos-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="cthulhuMythos-total">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="accounting"></td>
+                                        <td>経理</td>
+                                        <td id="accounting-base">10</td>
+                                        <td><input type="number" id="accounting-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="accounting-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="accounting-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="accounting-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="accounting-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="anthropology"></td>
+                                        <td>人類学</td>
+                                        <td id="anthropology-base">1</td>
+                                        <td><input type="number" id="anthropology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="anthropology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="anthropology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="anthropology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="anthropology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="archaeology"></td>
+                                        <td>考古学</td>
+                                        <td id="archaeology-base">1</td>
+                                        <td><input type="number" id="archaeology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="archaeology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="archaeology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="archaeology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="archaeology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="biology"></td>
+                                        <td>生物学</td>
+                                        <td id="biology-base">1</td>
+                                        <td><input type="number" id="biology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="biology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="biology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="biology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="biology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="chemistry"></td>
+                                        <td>化学</td>
+                                        <td id="chemistry-base">1</td>
+                                        <td><input type="number" id="chemistry-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="chemistry-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="chemistry-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="chemistry-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="chemistry-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="computer"></td>
+                                        <td>コンピューター</td>
+                                        <td id="computer-base">1</td>
+                                        <td><input type="number" id="computer-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="computer-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="computer-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="computer-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="computer-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="electronics"></td>
+                                        <td>電子工学</td>
+                                        <td id="electronics-base">1</td>
+                                        <td><input type="number" id="electronics-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electronics-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electronics-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electronics-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="electronics-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="geology"></td>
+                                        <td>地質学</td>
+                                        <td id="geology-base">1</td>
+                                        <td><input type="number" id="geology-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="geology-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="geology-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="geology-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="geology-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="law"></td>
+                                        <td>法律</td>
+                                        <td id="law-base">5</td>
+                                        <td><input type="number" id="law-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="law-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="law-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="law-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="law-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="navigate"></td>
+                                        <td>ナビゲート</td>
+                                        <td id="navigate-base">10</td>
+                                        <td><input type="number" id="navigate-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="navigate-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="navigate-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="navigate-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="navigate-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="physics"></td>
+                                        <td>物理学</td>
+                                        <td id="physics-base">1</td>
+                                        <td><input type="number" id="physics-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="physics-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="physics-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="physics-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="physics-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="astronomy"></td>
+                                        <td>天文学</td>
+                                        <td id="astronomy-base">1</td>
+                                        <td><input type="number" id="astronomy-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="astronomy-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="astronomy-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="astronomy-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="astronomy-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="naturalHistory"></td>
+                                        <td>博物学</td>
+                                        <td id="naturalHistory-base">10</td>
+                                        <td><input type="number" id="naturalHistory-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="naturalHistory-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="naturalHistory-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="naturalHistory-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="naturalHistory-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="photography"></td>
+                                        <td>写真術</td>
+                                        <td id="photography-base">10</td>
+                                        <td><input type="number" id="photography-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="photography-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="photography-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="photography-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="photography-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="psychoanalysis"></td>
+                                        <td>精神分析</td>
+                                        <td id="psychoanalysis-base">1</td>
+                                        <td><input type="number" id="psychoanalysis-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychoanalysis-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychoanalysis-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="psychoanalysis-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="psychoanalysis-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="pharmacy"></td>
+                                        <td>薬学</td>
+                                        <td id="pharmacy-base">1</td>
+                                        <td><input type="number" id="pharmacy-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pharmacy-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pharmacy-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pharmacy-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="pharmacy-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="survival"></td>
+                                        <td>サバイバル</td>
+                                        <td id="survival-base">10</td>
+                                        <td><input type="number" id="survival-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="survival-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="survival-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="survival-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="survival-total">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="ownLanguage"></td>
+                                        <td>母国語</td>
+                                        <td id="ownLanguage-base">0</td>
+                                        <td><input type="number" id="ownLanguage-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ownLanguage-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ownLanguage-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ownLanguage-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="ownLanguage-total">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="otherLanguage1"></td>
+                                        <td>他の言語1</td>
+                                        <td id="otherLanguage1-base">1</td>
+                                        <td><input type="number" id="otherLanguage1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="otherLanguage1-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="otherLanguage2"></td>
+                                        <td>他の言語2</td>
+                                        <td id="otherLanguage2-base">1</td>
+                                        <td><input type="number" id="otherLanguage2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="otherLanguage2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="otherLanguage2-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="art1"></td>
+                                        <td>芸術1</td>
+                                        <td id="art1-base">5</td>
+                                        <td><input type="number" id="art1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="art1-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="art2"></td>
+                                        <td>芸術2</td>
+                                        <td id="art2-base">5</td>
+                                        <td><input type="number" id="art2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="art2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="art2-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="craft1"></td>
+                                        <td>制作1</td>
+                                        <td id="craft1-base">5</td>
+                                        <td><input type="number" id="craft1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="craft1-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="craft2"></td>
+                                        <td>制作2</td>
+                                        <td id="craft2-base">5</td>
+                                        <td><input type="number" id="craft2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="craft2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="craft2-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="customSkill1"></td>
+                                        <td>追加技能1</td>
+                                        <td id="customSkill1-base">1</td>
+                                        <td><input type="number" id="customSkill1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="customSkill1-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="customSkill2"></td>
+                                        <td>追加技能2</td>
+                                        <td id="customSkill2-base">1</td>
+                                        <td><input type="number" id="customSkill2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="customSkill2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="customSkill2-total">1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 行動技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="actionSkillsHeader">
+                            <span><i class="fas fa-running"></i> 行動技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="actionSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="climb"></td>
+                                        <td>登攀</td>
+                                        <td id="climb-base">40</td>
+                                        <td><input type="number" id="climb-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="climb-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="climb-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="climb-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="climb-total">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="jump"></td>
+                                        <td>跳躍</td>
+                                        <td id="jump-base">25</td>
+                                        <td><input type="number" id="jump-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="jump-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="jump-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="jump-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="jump-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="swim"></td>
+                                        <td>水泳</td>
+                                        <td id="swim-base">25</td>
+                                        <td><input type="number" id="swim-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="swim-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="swim-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="swim-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="swim-total">25</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="drive"></td>
+                                        <td>運転(自動車)</td>
+                                        <td id="drive-base">20</td>
+                                        <td><input type="number" id="drive-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="drive-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="drive-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="drive-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="drive-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="driveOther"></td>
+                                        <td>運転(その他)</td>
+                                        <td id="driveOther-base">20</td>
+                                        <td><input type="number" id="driveOther-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="driveOther-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="driveOther-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="driveOther-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="driveOther-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="pilot1"></td>
+                                        <td>操縦1</td>
+                                        <td id="pilot1-base">1</td>
+                                        <td><input type="number" id="pilot1-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot1-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot1-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot1-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="pilot1-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="pilot2"></td>
+                                        <td>操縦2</td>
+                                        <td id="pilot2-base">1</td>
+                                        <td><input type="number" id="pilot2-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot2-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot2-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="pilot2-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="pilot2-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="ride"></td>
+                                        <td>乗馬</td>
+                                        <td id="ride-base">5</td>
+                                        <td><input type="number" id="ride-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ride-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ride-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="ride-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="ride-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="operateHeavyMachinery"></td>
+                                        <td>重機械操作</td>
+                                        <td id="operateHeavyMachinery-base">1</td>
+                                        <td><input type="number" id="operateHeavyMachinery-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="operateHeavyMachinery-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="operateHeavyMachinery-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="operateHeavyMachinery-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="operateHeavyMachinery-total">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="mechanicalRepair"></td>
+                                        <td>機械修理</td>
+                                        <td id="mechanicalRepair-base">20</td>
+                                        <td><input type="number" id="mechanicalRepair-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mechanicalRepair-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mechanicalRepair-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="mechanicalRepair-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="mechanicalRepair-total">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="electricalRepair"></td>
+                                        <td>電気修理</td>
+                                        <td id="electricalRepair-base">10</td>
+                                        <td><input type="number" id="electricalRepair-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electricalRepair-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electricalRepair-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="electricalRepair-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="electricalRepair-total">10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 交渉技能セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="negotiationSkillsHeader">
+                            <span><i class="fas fa-comments"></i> 交渉技能</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="negotiationSkillsContent">
+                            <table class="skill-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">成長</th>
+                                        <th width="20%">技能名</th>
+                                        <th width="10%">初期値</th>
+                                        <th width="15%">職業P</th>
+                                        <th width="15%">興味P</th>
+                                        <th width="15%">成長分</th>
+                                        <th width="10%">その他</th>
+                                        <th width="10%">合計</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="fastTalk"></td>
+                                        <td>言いくるめ</td>
+                                        <td id="fastTalk-base">5</td>
+                                        <td><input type="number" id="fastTalk-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="fastTalk-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="fastTalk-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="fastTalk-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="fastTalk-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="persuade"></td>
+                                        <td>説得</td>
+                                        <td id="persuade-base">15</td>
+                                        <td><input type="number" id="persuade-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="persuade-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="persuade-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="persuade-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="persuade-total">15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="bargain"></td>
+                                        <td>値切り</td>
+                                        <td id="bargain-base">5</td>
+                                        <td><input type="number" id="bargain-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="bargain-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="bargain-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="bargain-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="bargain-total">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="creditRating"></td>
+                                        <td>信用</td>
+                                        <td id="creditRating-base">15</td>
+                                        <td><input type="number" id="creditRating-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="creditRating-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="creditRating-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="creditRating-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="creditRating-total">15</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="growth-check" data-skill="disguise"></td>
+                                        <td>変装</td>
+                                        <td id="disguise-base">1</td>
+                                        <td><input type="number" id="disguise-occ" class="input skill-points occupation-points" value="0" min="0"></td>
+                                        <td><input type="number" id="disguise-int" class="input skill-points interest-points" value="0" min="0"></td>
+                                        <td><input type="number" id="disguise-growth" class="input skill-points growth-points" value="0" min="0"></td>
+                                        <td><input type="number" id="disguise-other" class="input skill-points other-points" value="0" min="0"></td>
+                                        <td class="total-cell" id="disguise-total">1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- カスタム情報入力セクション -->
+                    <div class="skill-category">
+                        <div class="skill-category-header" id="customFieldsHeader">
+                            <span><i class="fas fa-edit"></i> PDFシート用カスタム情報</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="skill-category-content" id="customFieldsContent">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="art1Name">芸術1の名称</label>
+                                    <input type="text" id="art1Name" class="input" placeholder="例：絵画">
+                                </div>
+                                <div class="form-group">
+                                    <label for="art1">芸術1値</label>
+                                    <input type="number" id="art1" class="input" value="5" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="art2Name">芸術2の名称</label>
+                                    <input type="text" id="art2Name" class="input" placeholder="例：写真">
+                                </div>
+                                <div class="form-group">
+                                    <label for="art2">芸術2値</label>
+                                    <input type="number" id="art2" class="input" value="5" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="craft1Name">制作1の名称</label>
+                                    <input type="text" id="craft1Name" class="input" placeholder="例：料理">
+                                </div>
+                                <div class="form-group">
+                                    <label for="craft1">制作1値</label>
+                                    <input type="number" id="craft1" class="input" value="5" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill1Name">追加技能1の名称</label>
+                                    <input type="text" id="customSkill1Name" class="input" placeholder="独自の技能">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill1">追加技能1値</label>
+                                    <input type="number" id="customSkill1" class="input" value="1" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill2Name">追加技能2の名称</label>
+                                    <input type="text" id="customSkill2Name" class="input" placeholder="独自の技能">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customSkill2">追加技能2値</label>
+                                    <input type="number" id="customSkill2" class="input" value="1" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customFirearmName">追加火器の名称</label>
+                                    <input type="text" id="customFirearmName" class="input" placeholder="例：ハンドキャノン">
+                                </div>
+                                <div class="form-group">
+                                    <label for="customFirearm">追加火器値</label>
+                                    <input type="number" id="customFirearm" class="input" value="1" min="0">
+                                </div>
+                                <!-- PDFシート用カスタム情報セクションの中に追加 -->
+                                <div class="form-group">
+                                    <label for="characterImage">キャラクター画像</label>
+                                    <div class="image-upload-container">
+                                        <input type="file" id="characterImage" accept="image/*" class="image-input">
+                                        <div id="characterImagePreview" class="image-preview">
+                                            <span class="image-placeholder">画像をドロップまたはクリックして選択</span>
+                                        </div>
+                                        <button id="removeImageBtn" class="btn danger image-remove-btn" style="display: none;"><i class="fas fa-trash"></i> 画像を削除
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- スキル追加ボタン -->
+                    <button id="addSkillBtn" class="btn accent"><i class="fas fa-plus"></i> 技能追加</button>
+                </div>
+            </div>
+            
+            <!-- 戦闘タブ -->
+            <div id="combat" class="tab-content">
+                <div class="panel">
+                    <h2><i class="fas fa-fist-raised"></i> 戦闘</h2>
+                    <div class="combat-section">
+                        <h3>近接戦</h3>
+                        <div class="combat-table">
+                            <div class="combat-header">
+                                <div class="col-skill">技能</div>
+                                <div class="col-percent">%</div>
+                                <div class="col-damage">ダメージ</div>
+                                <div class="col-range">射程</div>
+                                <div class="col-attacks">攻撃回数</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">こぶし (50%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="punch" name="skill.punch" class="input" value="50">
+                                </div>
+                                <div class="col-damage">1D3+db</div>
+                                <div class="col-range">タッチ</div>
+                                <div class="col-attacks">1</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">キック (25%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="kick" name="skill.kick" class="input" value="25">
+                                </div>
+                                <div class="col-damage">1D6+db</div>
+                                <div class="col-range">タッチ</div>
+                                <div class="col-attacks">1</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">頭突き (10%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="headbutt" name="skill.headbutt" class="input" value="10">
+                                </div>
+                                <div class="col-damage">1D4+db</div>
+                                <div class="col-range">タッチ</div>
+                                <div class="col-attacks">1</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">組みつき (25%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="grapple" name="skill.grapple" class="input" value="25">
+                                </div>
+                                <div class="col-damage">特殊</div>
+                                <div class="col-range">タッチ</div>
+                                <div class="col-attacks">1</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="combat-section">
+                        <h3>火器</h3>
+                        <div class="combat-table">
+                            <div class="combat-header">
+                                <div class="col-skill">技能</div>
+                                <div class="col-percent">%</div>
+                                <div class="col-damage">ダメージ</div>
+                                <div class="col-range">射程</div>
+                                <div class="col-attacks">攻撃回数</div>
+                                <div class="col-bullets">装弾数</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">拳銃 (20%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="handgun" name="skill.handgun" class="input" value="20">
+                                </div>
+                                <div class="col-damage">1D10</div>
+                                <div class="col-range">15m</div>
+                                <div class="col-attacks">1</div>
+                                <div class="col-bullets">7</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">ショットガン (30%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="shotgun" name="skill.shotgun" class="input" value="30">
+                                </div>
+                                <div class="col-damage">4D6</div>
+                                <div class="col-range">10m</div>
+                                <div class="col-attacks">1/2</div>
+                                <div class="col-bullets">2</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">ライフル (25%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="rifle" name="skill.rifle" class="input" value="25">
+                                </div>
+                                <div class="col-damage">2D6</div>
+                                <div class="col-range">100m</div>
+                                <div class="col-attacks">1</div>
+                                <div class="col-bullets">8</div>
+                            </div>
+                            
+                            <div class="combat-row">
+                                <div class="col-skill">サブマシンガン (15%)</div>
+                                <div class="col-percent">
+                                    <input type="number" id="submachineGun" name="skill.submachineGun" class="input" value="15">
+                                </div>
+                                <div class="col-damage">1D10</div>
+                                <div class="col-range">20m</div>
+                                <div class="col-attacks">1/3/連射</div>
+                                <div class="col-bullets">30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- プレビュータブ -->
+            <div id="preview" class="tab-content">
+                <div class="panel preview-sheet">
+                    <div class="sheet-header">
+                        <div class="sheet-title">
+                            <h2>クトゥルフ神話TRPG 探索者シート</h2>
+                        </div>
+                        <div class="sheet-info">
+                            <div class="sheet-row">
+                                <div class="sheet-label">探索者名：</div>
+                                <div class="sheet-value" id="preview-name"></div>
+                            </div>
+                            <div class="sheet-row">
+                                <div class="sheet-label">職業：</div>
+                                <div class="sheet-value" id="preview-occupation"></div>
+                            </div>
+                            <div class="sheet-row">
+                                <div class="sheet-label">学校・学位：</div>
+                                <div class="sheet-value" id="preview-school"></div>
+                            </div>
+                            <div class="sheet-row">
+                                <div class="sheet-label">出身：</div>
+                                <div class="sheet-value" id="preview-origin"></div>
+                            </div>
+                            <div class="sheet-row-2">
+                                <div class="sheet-col">
+                                    <div class="sheet-label">性別：</div>
+                                    <div class="sheet-value" id="preview-gender"></div>
+                                </div>
+                                <div class="sheet-col">
+                                    <div class="sheet-label">年齢：</div>
+                                    <div class="sheet-value" id="preview-age"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sheet-stats">
+                        <h3>能力値</h3>
+                        <div class="stat-table">
+                            <div class="stat-row">
+                                <div class="stat-cell">STR：<span id="preview-str"></span></div>
+                                <div class="stat-cell">DEX：<span id="preview-dex"></span></div>
+                                <div class="stat-cell">INT：<span id="preview-int"></span></div>
+                                <div class="stat-cell">アイデア：<span id="preview-idea"></span></div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-cell">CON：<span id="preview-con"></span></div>
+                                <div class="stat-cell">APP：<span id="preview-app"></span></div>
+                                <div class="stat-cell">POW：<span id="preview-pow"></span></div>
+                                <div class="stat-cell">幸運：<span id="preview-luck"></span></div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-cell">SIZ：<span id="preview-siz"></span></div>
+                                <div class="stat-cell">SAN：<span id="preview-san"></span></div>
+                                <div class="stat-cell">EDU：<span id="preview-edu"></span></div>
+                                <div class="stat-cell">知識：<span id="preview-knowledge"></span></div>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-cell">ダメージボーナス：<span id="preview-db"></span></div>
+                                <div class="stat-cell">耐久力：<span id="preview-hp"></span></div>
+                                <div class="stat-cell">MP：<span id="preview-mp"></span></div>
+                                <div class="stat-cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sheet-skills-preview">
+                        <h3>技能</h3>
+                        <div class="skills-grid">
+                            <div class="skills-column">
+                                <h4>探索技能</h4>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">聞き耳：</div>
+                                    <div class="skill-value" id="preview-listen"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">目星：</div>
+                                    <div class="skill-value" id="preview-spotHidden"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">図書館：</div>
+                                    <div class="skill-value" id="preview-libraryUse"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">追跡：</div>
+                                    <div class="skill-value" id="preview-track"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">鍵開け：</div>
+                                    <div class="skill-value" id="preview-locksmith"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">隠す：</div>
+                                    <div class="skill-value" id="preview-conceal"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">隠れる：</div>
+                                    <div class="skill-value" id="preview-hide"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">忍び歩き：</div>
+                                    <div class="skill-value" id="preview-sneak"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="skills-column">
+                                <h4>知識技能</h4>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">応急手当：</div>
+                                    <div class="skill-value" id="preview-firstAid"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">医学：</div>
+                                    <div class="skill-value" id="preview-medicine"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">クトゥルフ神話：</div>
+                                    <div class="skill-value" id="preview-cthulhuMythos"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">歴史：</div>
+                                    <div class="skill-value" id="preview-history"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">心理学：</div>
+                                    <div class="skill-value" id="preview-psychology"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">オカルト：</div>
+                                    <div class="skill-value" id="preview-occult"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">母国語：</div>
+                                    <div class="skill-value" id="preview-ownLanguage"></div>
+                                </div>
+                            </div>
+
+                            <div class="skills-column">
+                                <h4>行動技能</h4>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">登攀：</div>
+                                    <div class="skill-value" id="preview-climb"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">跳躍：</div>
+                                    <div class="skill-value" id="preview-jump"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">水泳：</div>
+                                    <div class="skill-value" id="preview-swim"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">運転：</div>
+                                    <div class="skill-value" id="preview-drive"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">運転(その他)：</div>
+                                    <div class="skill-value" id="preview-driveOther"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">操縦1：</div>
+                                    <div class="skill-value" id="preview-pilot1"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">操縦2：</div>
+                                    <div class="skill-value" id="preview-pilot2"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">乗馬：</div>
+                                    <div class="skill-value" id="preview-ride"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">重機械操作：</div>
+                                    <div class="skill-value" id="preview-operateHeavyMachinery"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">機械修理：</div>
+                                    <div class="skill-value" id="preview-mechanicalRepair"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">電気修理：</div>
+                                    <div class="skill-value" id="preview-electricalRepair"></div>
+                                </div>
+                            </div>
+
+                            <div class="skills-column">
+                                <h4>交渉技能</h4>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">言いくるめ：</div>
+                                    <div class="skill-value" id="preview-fastTalk"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">説得：</div>
+                                    <div class="skill-value" id="preview-persuade"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">値切り：</div>
+                                    <div class="skill-value" id="preview-bargain"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">信用：</div>
+                                    <div class="skill-value" id="preview-creditRating"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">変装：</div>
+                                    <div class="skill-value" id="preview-disguise"></div>
+                                </div>
+                            </div>
+
+                            <div class="skills-column">
+                                <h4>戦闘技能</h4>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">回避：</div>
+                                    <div class="skill-value" id="preview-dodge"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">こぶし：</div>
+                                    <div class="skill-value" id="preview-punch"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">キック：</div>
+                                    <div class="skill-value" id="preview-kick"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">組み付き：</div>
+                                    <div class="skill-value" id="preview-grapple"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">頭突き：</div>
+                                    <div class="skill-value" id="preview-headbutt"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">投擲：</div>
+                                    <div class="skill-value" id="preview-throw"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">拳銃：</div>
+                                    <div class="skill-value" id="preview-handgun"></div>
+                                </div>
+                                <div class="skill-preview-item">
+                                    <div class="skill-name">ライフル：</div>
+                                    <div class="skill-value" id="preview-rifle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 クトゥルフ神話TRPG キャラクター作成ツール</p>
+        </footer>
+    </div>
+
+    <!-- PDFキャンバス要素 (PDF生成時に使用) -->
+    <div id="pdf-container" style="display: none;">
+        <img id="characterSheetImg" src="" alt="キャラクターシート">
+        <!-- PDFに表示する入力フィールドはJSで動的に生成 -->
+    </div>
+
+    <!-- 必要なスクリプト -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

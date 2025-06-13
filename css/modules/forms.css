@@ -1,0 +1,196 @@
+/* フォームスタイル */
+
+/* 基本的な入力フィールド */
+.input, .select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus, .select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.2);
+}
+
+.input::placeholder {
+    color: rgba(142, 68, 173, 0.5);
+    font-style: italic;
+}
+
+.input[readonly] {
+    background-color: rgba(142, 68, 173, 0.1);
+    cursor: not-allowed;
+    border-color: rgba(142, 68, 173, 0.3);
+}
+
+/* セレクトボックス */
+.select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+/* ダイスロールボタン */
+.roll-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roll-btn:hover {
+    background-color: rgba(142, 68, 173, 0.8);
+    transform: scale(1.05);
+}
+
+.roll-btn.rolling {
+    animation: roll 0.5s ease-in-out;
+}
+
+@keyframes roll {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    75% { transform: rotate(270deg) scale(1.1); }
+}
+
+/* 画像アップロード */
+.image-upload-section {
+    text-align: center;
+}
+
+.image-preview {
+    width: 200px;
+    height: 250px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    background-color: var(--input-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-preview:hover {
+    border-color: var(--accent-color);
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.image-placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.remove-image-btn:hover {
+    background-color: rgba(231, 76, 60, 0.8);
+    transform: scale(1.1);
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: var(--panel-bg);
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: var(--hover-shadow);
+}
+
+.close {
+    color: var(--text-color);
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.close:hover {
+    color: var(--danger-color);
+}
+
+/* スキルポイント入力 */
+.skill-points {
+    max-width: 80px;
+}
+
+.occupation-points {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.interest-points {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.growth-points {
+    background-color: rgba(241, 196, 15, 0.1);
+}
+
+.other-points {
+    background-color: rgba(155, 89, 182, 0.1);
+}

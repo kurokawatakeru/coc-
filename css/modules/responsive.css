@@ -1,0 +1,262 @@
+/* レスポンシブデザイン */
+
+/* タブレット */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0.75rem;
+    }
+    
+    .derived-stats {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        border-radius: 0;
+    }
+    
+    .theme-switch-container {
+        position: static;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .skills-preview {
+        grid-template-columns: 1fr;
+    }
+    
+    .character-info {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+/* スマートフォン */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.25rem;
+    }
+    
+    .panel {
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .panel h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .derived-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .ability-control {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .roll-btn {
+        width: 100%;
+        height: 2rem;
+    }
+    
+    .input, .select {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .btn i {
+        margin-right: 0.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .tab-btn {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    header {
+        padding: 1rem;
+    }
+    
+    header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .theme-switch-container span {
+        font-size: 0.7rem;
+        margin: 0 0.25rem;
+    }
+    
+    .theme-switch {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .slider:before {
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3.5px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(25px);
+    }
+    
+    /* テーブルのレスポンシブ対応 */
+    .skill-table {
+        font-size: 0.75rem;
+    }
+    
+    .skill-table th,
+    .skill-table td {
+        padding: 0.25rem;
+    }
+    
+    .skill-table input {
+        padding: 0.15rem;
+        font-size: 0.75rem;
+    }
+    
+    .skill-points-table {
+        font-size: 0.8rem;
+    }
+    
+    .skill-points-table th,
+    .skill-points-table td {
+        padding: 0.5rem;
+    }
+    
+    .image-preview {
+        width: 150px;
+        height: 180px;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .character-info {
+        grid-template-columns: 1fr;
+        font-size: 0.8rem;
+    }
+    
+    .sheet-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .skills-column h4 {
+        font-size: 1rem;
+    }
+    
+    .skill-preview-item {
+        font-size: 0.8rem;
+    }
+}
+
+/* 印刷用スタイル */
+@media print {
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    header,
+    .tabs,
+    .controls,
+    .btn,
+    footer {
+        display: none !important;
+    }
+    
+    .character-sheet {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .tab-content {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+    
+    .panel {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .skill-table,
+    .skill-points-table {
+        break-inside: avoid;
+    }
+    
+    .skill-category {
+        break-inside: avoid;
+    }
+}
+
+/* 高解像度ディスプレイ対応 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .roll-btn {
+        border: 0.5px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn {
+        border: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .input, .select {
+        border-width: 1px;
+    }
+}
