@@ -37,27 +37,27 @@ export async function printCharacterSheet() {
             { x: 322, y: 92, width: 172, height: 22, type: 'text', field: 'occupation' },  // 職業
             { x: 337, y: 124, width: 156, height: 24, type: 'text', field: 'school' }, // 学校・学位
             { x: 282, y: 162, width: 203, height: 25, type: 'text', field: 'origin' }, // 出身
-            { x: 283, y: 198, width: 61, height: 25, type: 'text', field: 'gender' },  // 性別
-            { x: 408, y: 200, width: 44, height: 21, type: 'number', field: 'age' },// 年齢
-            { x: 620, y: 90, width: 35, height: 25, type: 'number', field: 'str' }, // STR
-            { x: 664, y: 95, width: 35, height: 20, type: 'number', field: 'strPercent' }, // STR✖️5
-            { x: 772, y: 91, width: 35, height: 20, type: 'number', field: 'dex' }, // DEX
-            { x: 825, y: 95, width: 35, height: 20, type: 'number', field: 'dexPercent' }, // DEX✖️5
-            { x: 935, y: 90, width: 35, height: 20, type: 'number', field: 'int' }, // INT
-            { x: 1041, y: 91, width: 35, height: 20, type: 'number', field: 'idea' },// アイデア
-            { x: 620, y: 126, width: 35, height: 20, type: 'number', field: 'con' },// CON
-            { x: 664, y: 130, width: 35, height: 20, type: 'number', field: 'conPercent' }, // CON✖️5
-            { x: 772, y: 126, width: 35, height: 20, type: 'number', field: 'app' },// APP
-            { x: 825, y: 130, width: 35, height: 20, type: 'number', field: 'appPercent' }, // APP✖️5
-            { x: 935, y: 127, width: 35, height: 20, type: 'number', field: 'pow' },// POW
-            { x: 1031, y: 128, width: 35, height: 20, type: 'number', field: 'luck' },// 幸運
-            { x: 620, y: 160, width: 35, height: 20, type: 'number', field: 'siz' },// SIZ
-            { x: 664, y: 165, width: 35, height: 20, type: 'number', field: 'sizPercent' }, // SIZ✖️5
-            { x: 550, y: 516, width: 35, height: 18, type: 'number', field: 'eduSkillPoints' },// 職業技能
-            { x: 771, y: 162, width: 35, height: 20, type: 'number', field: 'san' },// SAN
-            { x: 1030, y: 162, width: 35, height: 20, type: 'number', field: 'knowledge' },// 知識    
-            { x: 935, y: 163, width: 35, height: 20, type: 'number', field: 'edu' },// EDU
-            { x: 720, y: 516, width: 35, height: 18, type: 'number', field: 'intSkillPoints' },//任意
+            { x: 283, y: 196, width: 61, height: 25, type: 'text', field: 'gender' },  // 性別
+            { x: 418, y: 196, width: 44, height: 21, type: 'number', field: 'age' },// 年齢
+            { x: 630, y: 90, width: 35, height: 25, type: 'number', field: 'str' }, // STR
+            { x: 674, y: 90, width: 35, height: 20, type: 'number', field: 'strPercent' }, // STR✖️5
+            { x: 792, y: 90, width: 35, height: 20, type: 'number', field: 'dex' }, // DEX
+            { x: 845, y: 90, width: 35, height: 20, type: 'number', field: 'dexPercent' }, // DEX✖️5
+            { x: 960, y: 90, width: 35, height: 20, type: 'number', field: 'int' }, // INT
+            { x: 1065, y: 90, width: 35, height: 20, type: 'number', field: 'idea' },// アイデア
+            { x: 630, y: 126, width: 35, height: 20, type: 'number', field: 'con' },// CON
+            { x: 674, y: 130, width: 35, height: 20, type: 'number', field: 'conPercent' }, // CON✖️5
+            { x: 792, y: 126, width: 35, height: 20, type: 'number', field: 'app' },// APP
+            { x: 845, y: 130, width: 35, height: 20, type: 'number', field: 'appPercent' }, // APP✖️5
+            { x: 960, y: 127, width: 35, height: 20, type: 'number', field: 'pow' },// POW
+            { x: 1065, y: 128, width: 35, height: 20, type: 'number', field: 'luck' },// 幸運
+            { x: 630, y: 160, width: 35, height: 20, type: 'number', field: 'siz' },// SIZ
+            { x: 674, y: 165, width: 35, height: 20, type: 'number', field: 'sizPercent' }, // SIZ✖️5
+            { x: 550, y: 513, width: 35, height: 18, type: 'number', field: 'eduSkillPoints' },// 職業技能
+            { x: 792, y: 162, width: 35, height: 20, type: 'number', field: 'san' },// SAN
+            { x: 1065, y: 162, width: 35, height: 20, type: 'number', field: 'knowledge' },// 知識    
+            { x: 960, y: 163, width: 35, height: 20, type: 'number', field: 'edu' },// EDU
+            { x: 740, y: 513, width: 35, height: 18, type: 'number', field: 'intSkillPoints' },//任意
             { x: 450, y: 549, width: 35, height: 20, type: 'number', field: 'fastTalk' },// 言いくるめ
             { x: 450, y: 577, width: 35, height: 20, type: 'number', field: 'medicine' },//医学
             { x: 450, y: 607, width: 35, height: 20, type: 'number', field: 'drive' },//運転(自動車)
